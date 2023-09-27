@@ -1,0 +1,18 @@
+{
+	"search.exclude": {
+		"export/**/*.*": true
+	},
+	"[haxe]": {
+		"editor.formatOnSave": true,
+		"editor.formatOnSaveMode":"modifications",
+		"editor.formatOnPaste": false,
+		"editor.codeActionsOnSave": {
+			"source.sortImports": true
+		}
+	},
+	"haxe.enableExtendedIndentation": true,
+	"lime.executable": "lix lime",
+	"haxecheckstyle.sourceFolders": [
+		"source"
+	]
+}

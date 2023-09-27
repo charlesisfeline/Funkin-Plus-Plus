@@ -1,0 +1,20 @@
+{
+  "defaultSeverity": "INFO",
+  "checks": [
+    {
+      "type": "RedundantAccessMeta"
+    },
+    {
+      "type": "RedundantAllowMeta"
+    },
+    {
+      "type": "UnnecessaryConstructor"
+    },
+    {
+      "type": "UnusedImport"
+    },
+    {
+      "type": "UnusedLocalVar"
+    }
+  ]
+}
