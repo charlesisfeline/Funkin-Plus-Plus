@@ -32,6 +32,8 @@ jobs:
           haxelib install flixel-addons
           haxelib install hxCodec
           haxelib install hscript
+          haxelib install tjson
+          haxelib install hxcpp-debug-server
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
       - name: Compile
         run: haxelib run lime build linux
@@ -62,6 +64,8 @@ jobs:
           haxelib install flixel-addons
           haxelib install hxCodec
           haxelib install hscript
+          haxelib install tjson
+          haxelib install hxcpp-debug-server
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
         shell: cmd
       - name: Compile
@@ -93,6 +97,8 @@ jobs:
           haxelib install flixel-addons
           haxelib install hxCodec
           haxelib install hscript
+          haxelib install hxcpp-debug-server
+          haxelib install tjson
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
       - name: Compile
         run: haxelib run lime build mac
