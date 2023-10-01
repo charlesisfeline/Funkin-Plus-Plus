@@ -899,7 +899,7 @@ class PlayState extends MusicBeatState
 		blackShit.scrollFactor.set();
 		add(blackShit);
 
-		new FlxVideo('music/ughCutscene.mp4', function()
+		new FlxVideo('videos/ughCutscene.mp4', function()
 		{
 			remove(blackShit);
 			FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.crochet / 1000) * 5, {ease: FlxEase.quadInOut});
@@ -921,7 +921,7 @@ class PlayState extends MusicBeatState
 		blackShit.scrollFactor.set();
 		add(blackShit);
 
-		new FlxVideo('music/gunsCutscene.mp4', function()
+		new FlxVideo('videos/gunsCutscene.mp4', function()
 		{
 			remove(blackShit);
 
@@ -939,7 +939,7 @@ class PlayState extends MusicBeatState
 		blackShit.scrollFactor.set();
 		add(blackShit);
 
-		new FlxVideo('music/stressCutscene.mp4', function()
+		new FlxVideo('videos/stressCutscene.mp4', function()
 		{
 			remove(blackShit);
 

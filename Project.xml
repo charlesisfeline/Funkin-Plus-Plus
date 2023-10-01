@@ -2,7 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
-	<app title="Friday Night Funkin++" file="FNFPlusPlus" packageName="com.charlescatyt.funkinplusplus" package="com.charlescatyt.funkinplusplus" main="Main" version="0.2.8" company="charlescatyt" />
+	<app title="Friday Night Funkin': Funkin++" file="FNFPlusPlus" packageName="com.charlescatyt.funkinplusplus" package="com.charlescatyt.funkinplusplus" main="Main" version="0.2.8" company="charlescatyt" />
 
 	<app preloader="flixel.system.FlxPreloader" />
 	<set name="SWF_VERSION" value="11.8" />
@@ -73,7 +73,8 @@
 	<assets path='LICENSE.txt' />
 	<assets path='art/readme copy.txt' rename='readme.txt' />
 	<assets path='art/readme.txt' rename='baseReadme.txt' />
-	<assets path="CHANGELOG.md" rename='changelog.txt'/>
+	<assets path="CHANGELOG.md" />
+	<assets path="mods/mods.md" rename='mods/MODDING.md'/>
 
 	<assets path="assets/fonts" embed='false' />
 	<!-- _______________________________ Libraries ______________________________ -->
