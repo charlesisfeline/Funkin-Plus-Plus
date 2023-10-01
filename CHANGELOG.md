@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Reverted license to Apache License 2.0.
 
-## 1.0.0 - 2023-09-16
+## 1.0.0 - 2023-09-30
 
 ### Added
 

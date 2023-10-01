@@ -7,6 +7,11 @@ import flixel.util.FlxSort;
 
 using StringTools;
 
+typedef CharacterData =
+{
+	var scale:Float = 1;
+}
+
 class Character extends FlxSprite
 {
 	public var animOffsets:Map<String, Array<Dynamic>>;
