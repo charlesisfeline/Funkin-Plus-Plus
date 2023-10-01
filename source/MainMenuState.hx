@@ -72,7 +72,6 @@ class MainMenuState extends MusicBeatState
 		magenta.color = 0xFFfd719b;
 		if (PreferencesMenu.preferences.get('flashing-menu'))
 			add(magenta);
-		// magenta.scrollFactor.set();
 
 		menuItems = new MainMenuList();
 		add(menuItems);
@@ -85,7 +84,6 @@ class MainMenuState extends MusicBeatState
 		menuItems.enabled = false; // disable for intro
 		menuItems.createItem('story mode', function() startExitState(new StoryMenuState()));
 		menuItems.createItem('freeplay', function() startExitState(new FreeplayState()));
-		// addMenuItem('options', function () startExitState(new OptionMenu()));
 		#if CAN_OPEN_LINKS
 		var hasPopupBlocker = #if web true #else false #end;
 
@@ -108,9 +106,9 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.cameras.reset(new SwagCamera());
 		FlxG.camera.follow(camFollow, null, 0.06);
-		// FlxG.camera.setScrollBounds(bg.x, bg.x + bg.width, bg.y, bg.y + bg.height * 1.2);
 
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "v" + Application.current.meta.get('version'), 12);
+		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "Funkin' Plus Plus\nFriday Night Funkin' v" + Application.current.meta.get('version'),
+			12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -168,8 +166,6 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		// FlxG.camera.followLerp = CoolUtil.camLerpShit(0.06);
-
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
