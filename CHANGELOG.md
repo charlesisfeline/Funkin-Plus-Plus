@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [lix](https://github.com/lix-pm/lix.client) support.
 - [Haxe Checkstyle](https://github.com/HaxeCheckstyle/haxe-checkstyle) settings.
 - Implemented [hxCodec](https://github.com/polybiusproxy/hxCodec) for playing videos natively.
+- Slightly more softcoded dialogue, still only Senpai though.
 
 ### Changed
 
