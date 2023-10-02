@@ -1,4 +1,4 @@
-package;
+package states;
 
 #if discord_rpc
 import Discord.DiscordClient;
@@ -224,7 +224,7 @@ class FreeplayState extends MusicBeatState
 		if (controls.BACK)
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			FlxG.switchState(new MainMenuState());
+			FlxG.switchState(new states.MainMenuState());
 		}
 
 		if (accepted)

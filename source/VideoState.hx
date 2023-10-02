@@ -1,8 +1,8 @@
 package;
 
-import MusicBeatState;
 import flixel.*;
 import flixel.FlxG;
+
 using StringTools;
 
 class VideoState extends MusicBeatState

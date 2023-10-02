@@ -22,8 +22,8 @@ import openfl.events.MouseEvent;
 import openfl.events.NetStatusEvent;
 import openfl.media.Video;
 import openfl.net.NetStream;
-import shaderslmfao.BuildingShaders;
-import shaderslmfao.ColorSwap;
+import shaders.BuildingShaders;
+import shaders.ColorSwap;
 import ui.PreferencesMenu;
 
 using StringTools;
@@ -88,13 +88,10 @@ class TitleState extends MusicBeatState
 		{
 			VideoState.seenVideo = FlxG.save.data.seenVideo;
 		}
-
-		#else
 		new FlxTimer().start(1, function(tmr:FlxTimer)
 		{
 			startIntro();
 		});
-		#end
 
 		#if discord_rpc
 		DiscordClient.initialize();
@@ -294,7 +291,7 @@ class TitleState extends MusicBeatState
 
 			transitioning = true;
 
-			FlxG.switchState(new MainMenuState());
+			FlxG.switchState(new states.MainMenuState());
 		}
 
 		if (pressedEnter && !skippedIntro && initialized)

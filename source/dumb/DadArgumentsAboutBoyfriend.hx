@@ -18,7 +18,7 @@ class DadArgumentsAboutBoyfriend
 
 	public function addArgument(argument:String)
 	{
-		trace('holy shit new argument 😐');
+		trace('holy shit new argument ._.');
 		arguments.push(argument);
 	}
 

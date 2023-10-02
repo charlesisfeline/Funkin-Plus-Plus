@@ -14,6 +14,7 @@
     - [ ] Character Editor
     - [ ] Fix bugs
 - [ ] Botplay
+- [ ] Credits menu
 - [ ] Add note offset
 - [ ] Verbose mode (`--verbose`)
 - [ ] Tooltips

@@ -1,4 +1,4 @@
-package;
+package substates;
 
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -12,6 +12,8 @@ import flixel.util.FlxColor;
 class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
+
+	var bg:FlxSprite;
 
 	var pauseOG:Array<String> = [
 		'Resume',
@@ -28,6 +30,8 @@ class PauseSubState extends MusicBeatSubstate
 	var pauseMusic:FlxSound;
 
 	var practiceText:FlxText;
+	
+	var pauseSong:String = 'breakfast';
 
 	public function new(x:Float, y:Float)
 	{
@@ -35,13 +39,13 @@ class PauseSubState extends MusicBeatSubstate
 
 		menuItems = pauseOG;
 
-		pauseMusic = new FlxSound().loadEmbedded(Paths.music('breakfast'), true, true);
+		pauseMusic = new FlxSound().loadEmbedded(Paths.music(pauseSong), true, true);
 		pauseMusic.volume = 0;
 		pauseMusic.play(false, FlxG.random.int(0, Std.int(pauseMusic.length / 2)));
 
 		FlxG.sound.list.add(pauseMusic);
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		bg.alpha = 0;
 		bg.scrollFactor.set();
 		add(bg);
@@ -61,7 +65,7 @@ class PauseSubState extends MusicBeatSubstate
 		add(levelDifficulty);
 
 		var deathCounter:FlxText = new FlxText(20, 15 + 64, 0, "", 32);
-		deathCounter.text = "Blue balled: " + PlayState.deathCounter;
+		deathCounter.text = "Deaths: " + PlayState.deathCounter;
 		deathCounter.scrollFactor.set();
 		deathCounter.setFormat(Paths.font('vcr.ttf'), 32);
 		deathCounter.updateHitbox();
@@ -92,8 +96,6 @@ class PauseSubState extends MusicBeatSubstate
 		add(grpMenuShit);
 
 		regenMenu();
-
-		// cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
 
 	private function regenMenu():Void
@@ -115,6 +117,10 @@ class PauseSubState extends MusicBeatSubstate
 		changeSelection();
 	}
 
+	var upP = controls.UI_UP_P;
+	var downP = controls.UI_DOWN_P;
+	var accepted = controls.ACCEPT;
+
 	override function update(elapsed:Float)
 	{
 		if (pauseMusic.volume < 0.5)
@@ -122,18 +128,10 @@ class PauseSubState extends MusicBeatSubstate
 
 		super.update(elapsed);
 
-		var upP = controls.UI_UP_P;
-		var downP = controls.UI_DOWN_P;
-		var accepted = controls.ACCEPT;
-
 		if (upP)
-		{
 			changeSelection(-1);
-		}
 		if (downP)
-		{
 			changeSelection(1);
-		}
 
 		if (accepted)
 		{
@@ -144,8 +142,7 @@ class PauseSubState extends MusicBeatSubstate
 				case "Resume":
 					close();
 				case "EASY" | 'NORMAL' | "HARD":
-					PlayState.SONG = Song.loadFromJson(Highscore.formatSong(PlayState.SONG.song.toLowerCase(), curSelected),
-						PlayState.SONG.song.toLowerCase());
+					PlayState.SONG = Song.loadFromJson(Highscore.formatSong(PlayState.SONG.song.toLowerCase(), curSelected), PlayState.SONG.song.toLowerCase());
 
 					PlayState.storyDifficulty = curSelected;
 
@@ -167,17 +164,13 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.seenCutscene = false;
 					PlayState.deathCounter = 0;
 					if (PlayState.isStoryMode)
-						FlxG.switchState(new StoryMenuState());
+						FlxG.switchState(new states.StoryMenuState());
 					else
-						FlxG.switchState(new FreeplayState());
+						FlxG.switchState(new states.FreeplayState());
 			}
 		}
 
-		if (FlxG.keys.justPressed.J)
-		{
-			// for reference later!
-			// PlayerSettings.player1.controls.replaceBinding(Control.LEFT, Keys, FlxKey.J, null);
-		}
+		if (FlxG.keys.justPressed.J) {}
 	}
 
 	override function destroy()
@@ -186,6 +179,8 @@ class PauseSubState extends MusicBeatSubstate
 
 		super.destroy();
 	}
+
+	var bullShit:Int = 0;
 
 	function changeSelection(change:Int = 0):Void
 	{
@@ -198,21 +193,14 @@ class PauseSubState extends MusicBeatSubstate
 		if (curSelected >= menuItems.length)
 			curSelected = 0;
 
-		var bullShit:Int = 0;
-
 		for (item in grpMenuShit.members)
 		{
 			item.targetY = bullShit - curSelected;
 			bullShit++;
 
 			item.alpha = 0.6;
-			// item.setGraphicSize(Std.int(item.width * 0.8));
-
 			if (item.targetY == 0)
-			{
 				item.alpha = 1;
-				// item.setGraphicSize(Std.int(item.width));
-			}
 		}
 	}
 }

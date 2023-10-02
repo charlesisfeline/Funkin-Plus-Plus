@@ -25,6 +25,8 @@
 
 	<define name="LOADING_SCREEN" /> <!-- LoADing... -->
 	<define name="CRASH_HANDLER" if="desktop release" />
+	<define name="DPI_AWARE" />
+	<define name="NO_DCE" />
 
 	<!-- _____________________________ Path Settings ____________________________ -->
 
@@ -84,6 +86,8 @@
 	<haxelib name="flixel-ui" />
 	<haxelib name="hscript" />
 	<haxelib name="hxcpp-debug-server" if="desktop" />
+	<haxelib name="format" />
+	<haxelib name="tjson" />
 
 	<haxelib name="discord_rpc" if="cpp"/> <!-- doesn't work with neko, probably should fix that later -->
 	<haxelib name="hxCodec" if="cpp"/>
@@ -92,6 +96,8 @@
 
 	<!--Enable a new and optimized OpenFL game loop (boosts performance, and takes less memory)-->
 	<haxedef name="queue_experimental_optimization" />
+
+	<haxedef name="openfl_dpi_aware" if="DPI_AWARE" />
 
 	<!--Enable the Flixel core recording system-->
 	<haxedef name="FLX_RECORD" if="debug" />
@@ -117,7 +123,15 @@
 	
 	<!-- Enable HScript fine error reporting at parsing time -->
 	<haxedef name="hscriptPos" value="true" if="hscript" />
-	
+
+	<section if="COMPILE_ALL_CLASSES">
+		<haxeflag name="-dce" value="no" if="hscript" />
+		<haxeflag name="-dce" value="std" unless="hscript" />
+	</section>
+
+    <haxedef name="no-deprecation-warnings" />
+	<haxedef name="annotate-source" />
+	<haxedef name="analyzer-optimize" />
 
 	<!-- _________________________________ Custom _______________________________ -->
 

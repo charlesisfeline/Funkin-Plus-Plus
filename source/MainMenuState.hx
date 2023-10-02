@@ -1,4 +1,4 @@
-package;
+package states;
 
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -19,10 +19,10 @@ import ui.OptionsState;
 import ui.PreferencesMenu;
 
 using StringTools;
-
 #if discord_rpc
 import Discord.DiscordClient;
 #end
+
 
 class MainMenuState extends MusicBeatState
 {
@@ -82,15 +82,12 @@ class MainMenuState extends MusicBeatState
 		});
 
 		menuItems.enabled = false; // disable for intro
-		menuItems.createItem('story mode', function() startExitState(new StoryMenuState()));
-		menuItems.createItem('freeplay', function() startExitState(new FreeplayState()));
+		menuItems.createItem('story mode', function() startExitState(new states.StoryMenuState()));
+		menuItems.createItem('freeplay', function() startExitState(new states.FreeplayState()));
 		#if CAN_OPEN_LINKS
 		var hasPopupBlocker = #if web true #else false #end;
 
-		if (VideoState.seenVideo)
-			menuItems.createItem('kickstarter', selectDonate, hasPopupBlocker);
-		else
-			menuItems.createItem('donate', selectDonate, hasPopupBlocker);
+		menuItems.createItem('donate', selectDonate, hasPopupBlocker);
 		#end
 		menuItems.createItem('options', function() startExitState(new OptionsState()));
 
@@ -132,15 +129,9 @@ class MainMenuState extends MusicBeatState
 	function selectDonate()
 	{
 		#if linux
-		// Sys.command('/usr/bin/xdg-open', ["https://ninja-muffin24.itch.io/funkin", "&"]);
-		Sys.command('/usr/bin/xdg-open', [
-			"https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game/",
-			"&"
-		]);
+		Sys.command('/usr/bin/xdg-open', ["https://ninja-muffin24.itch.io/funkin", "&"]);
 		#else
-		// FlxG.openURL('https://ninja-muffin24.itch.io/funkin');
-
-		FlxG.openURL('https://www.kickstarter.com/projects/funkin/friday-night-funkin-the-full-ass-game/');
+		FlxG.openURL('https://ninja-muffin24.itch.io/funkin');
 		#end
 	}
 	#end

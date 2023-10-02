@@ -1,4 +1,4 @@
-package;
+package ui;
 
 import haxe.Timer;
 import openfl.Lib;
@@ -40,22 +40,25 @@ class FPSInfo extends TextField
 		var now:Float = Timer.stamp();
 		times.push(now);
 
-		while (times[0] < now - 1) 
-            times.shift();
+		while (times[0] < now - 1)
+			times.shift();
 
 		var mem:Float = Math.round(System.totalMemory / 1024 / 1024 * 100) / 100;
-		if (mem > memoryPeak) memoryPeak = mem;
+		if (mem > memoryPeak)
+			memoryPeak = mem;
 
 		if (visible)
 		{
 			text = "";
 
-			if (showFPS) text += "FPS: " + times.length + "\n";
+			if (showFPS)
+				text += "FPS: " + times.length + "\n";
 
 			if (showMemory)
 			{
 				text += "MEM: " + mem + "mb";
-				if (showMemoryPeak) text += " / " + memoryPeak + "mb";
+				if (showMemoryPeak)
+					text += " / " + memoryPeak + "mb";
 			}
 		}
 	}

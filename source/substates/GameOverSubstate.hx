@@ -1,4 +1,4 @@
-package;
+package substates;
 
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -86,7 +86,7 @@ class GameOverSubstate extends MusicBeatSubstate
 			if (PlayState.isStoryMode)
 				FlxG.switchState(new StoryMenuState());
 			else
-				FlxG.switchState(new FreeplayState());
+				FlxG.switchState(new states.FreeplayState());
 		}
 
 		#if debug

@@ -22,15 +22,19 @@ import flixel.ui.FlxBar;
 import flixel.util.FlxColor;
 import flixel.util.FlxSort;
 import flixel.util.FlxTimer;
-import shaderslmfao.BuildingShaders;
-import shaderslmfao.ColorSwap;
+import game.*;
+import game.BGSprite;
+import game.BackgroundDancer;
+import game.BackgroundGirls;
+import lime.app.*;
+import shaders.BuildingShaders;
 import ui.PreferencesMenu;
 
 using StringTools;
-
 #if discord_rpc
 import Discord.DiscordClient;
 #end
+
 
 class PlayState extends MusicBeatState
 {
@@ -83,7 +87,7 @@ class PlayState extends MusicBeatState
 	private var camHUD:FlxCamera;
 	private var camGame:FlxCamera;
 
-	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
+	var dialogue:Array<String> = ['blah blah blah', 'coolswag', 'beep boop bap', 'test'];
 
 	public static var seenCutscene:Bool = false;
 
@@ -161,7 +165,7 @@ class PlayState extends MusicBeatState
 		persistentDraw = true;
 
 		if (SONG == null)
-			SONG = Song.loadFromJson('tutorial');
+			SONG = Song.loadFromJson('test');
 
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
@@ -457,7 +461,6 @@ class PlayState extends MusicBeatState
 				// fg.updateHitbox();
 				add(fg);
 			 */
-
 			/* 
 				var waveSprite = new FlxEffectSprite(bg, [waveEffectBG]);
 				var waveSpriteFG = new FlxEffectSprite(fg, [waveEffectFG]);
@@ -886,7 +889,7 @@ class PlayState extends MusicBeatState
 				default:
 					startCountdown();
 			}
-		} 
+		}
 
 		super.create();
 	}
@@ -1105,24 +1108,26 @@ class PlayState extends MusicBeatState
 				introSprPaths = ['weeb/pixelUI/ready-pixel', 'weeb/pixelUI/set-pixel', 'weeb/pixelUI/date-pixel'];
 			}
 
-			var introSndPaths:Array<String> = ["intro3" + altSuffix, "intro2" + altSuffix,
-				"intro1" + altSuffix, "introGo" + altSuffix];
+			var introSndPaths:Array<String> = [
+				"intro3" + altSuffix, "intro2" + altSuffix,
+				"intro1" + altSuffix, "introGo" + altSuffix
+			];
 
 			if (swagCounter > 0)
 				readySetGo(introSprPaths[swagCounter - 1]);
 			FlxG.sound.play(Paths.sound(introSndPaths[swagCounter]), 0.6);
 
 			/* switch (swagCounter)
-			{
-				case 0:
-					
-				case 1:
-					
-				case 2:
-					
-				case 3:
-					
-			} */
+				{
+					case 0:
+						
+					case 1:
+						
+					case 2:
+						
+					case 3:
+						
+			}*/
 
 			swagCounter += 1;
 		}, 4);
@@ -1280,8 +1285,10 @@ class PlayState extends MusicBeatState
 
 			babyArrow.postAddedToGroup();
 
-			if (player == 1) playerStrums.add(babyArrow);
-			else opponentStrums.add(babyArrow);
+			if (player == 1)
+				playerStrums.add(babyArrow);
+			else
+				opponentStrums.add(babyArrow);
 
 			babyArrow.animation.play('static');
 			babyArrow.x += 50;
@@ -1443,7 +1450,7 @@ class PlayState extends MusicBeatState
 		super.update(elapsed);
 
 		scoreTxt.text = 'Score: $songScore // Health: $health // Misses: $songMisses';
-		
+
 		if (controls.PAUSE && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
@@ -1451,19 +1458,19 @@ class PlayState extends MusicBeatState
 			paused = true;
 
 			/*// 1 / 1000 chance for Gitaroo Man easter egg
-			if (FlxG.random.bool(0.1))
-			{
-				// gitaroo man easter egg
-				FlxG.switchState(new GitarooPause());
-			}
-			else
-			{*/
-				var boyfriendPos = boyfriend.getScreenPosition();
-				var pauseSubState = new PauseSubState(boyfriendPos.x, boyfriendPos.y);
-				openSubState(pauseSubState);
-				pauseSubState.camera = camHUD;
-				boyfriendPos.put();
-			//}
+				if (FlxG.random.bool(0.1))
+				{
+					// gitaroo man easter egg
+					FlxG.switchState(new GitarooPause());
+				}
+				else
+				{ */
+			var boyfriendPos = boyfriend.getScreenPosition();
+			var pauseSubState = new substates.PauseSubState(boyfriendPos.x, boyfriendPos.y);
+			openSubState(pauseSubState);
+			pauseSubState.camera = camHUD;
+			boyfriendPos.put();
+			// }
 
 			#if discord_rpc
 			DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconRPC);
@@ -1480,7 +1487,7 @@ class PlayState extends MusicBeatState
 		}
 
 		/*if (FlxG.keys.justPressed.NINE)
-			iconP1.swapOldIcon();*/
+			iconP1.swapOldIcon(); */
 
 		iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP1.width, 0.85)));
 		iconP2.setGraphicSize(Std.int(FlxMath.lerp(150, iconP2.width, 0.85)));
@@ -1512,12 +1519,12 @@ class PlayState extends MusicBeatState
 		if (FlxG.keys.justPressed.EIGHT)
 		{
 			/* 	 8 for opponent char
-			   SHIFT+8 for player char
-				 CTRL+SHIFT+8 for gf   */
+							   SHIFT+8 for player char
+				CTRL+SHIFT+8 for gf */
 			if (FlxG.keys.pressed.SHIFT)
 				if (FlxG.keys.pressed.CONTROL)
 					FlxG.switchState(new AnimationDebug(gf.curCharacter));
-				else 
+				else
 					FlxG.switchState(new AnimationDebug(SONG.player1));
 			else
 				FlxG.switchState(new AnimationDebug(SONG.player2));
@@ -1583,9 +1590,9 @@ class PlayState extends MusicBeatState
 			}
 
 			/*if (controls.CHEAT)
-			{
-				health += 1;
-				trace("User is cheating!");
+				{
+					health += 1;
+					trace("User is cheating!");
 			}*/
 
 			if (health <= 0 && !practiceMode)
@@ -1603,7 +1610,7 @@ class PlayState extends MusicBeatState
 
 				deathCounter += 1;
 
-				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+				openSubState(new substates.GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 
 				#if discord_rpc
 				// Game Over doesn't get his own variable because it's only used here
@@ -1772,7 +1779,7 @@ class PlayState extends MusicBeatState
 				// var noteMiss:Bool = daNote.y < -daNote.height;
 
 				// if (PreferencesMenu.getPref('downscroll'))
-					// noteMiss = daNote.y > FlxG.height;
+				// noteMiss = daNote.y > FlxG.height;
 
 				if (daNote.isSustainNote && daNote.wasGoodHit)
 				{
@@ -1787,7 +1794,8 @@ class PlayState extends MusicBeatState
 						daNote.destroy();
 					}
 				}
-				else if (isOutsideScreen){
+				else if (isOutsideScreen)
+				{
 					if (daNote.tooLate || daNote.wasGoodHit)
 					{
 						if (daNote.tooLate)
@@ -1938,7 +1946,7 @@ class PlayState extends MusicBeatState
 		{
 			trace('WENT BACK TO FREEPLAY??');
 			// unloadAssets();
-			FlxG.switchState(new FreeplayState());
+			FlxG.switchState(new states.FreeplayState());
 		}
 	}
 
@@ -2283,9 +2291,10 @@ class PlayState extends MusicBeatState
 
 		playerStrums.forEach(function(spr:StrumNote)
 		{
-				if (controlArray[spr.ID] && spr.animation.curAnim.name != 'confirm')
-					spr.playAnim('pressed');
-				if (!holdingArray[spr.ID]) spr.playAnim('static');
+			if (controlArray[spr.ID] && spr.animation.curAnim.name != 'confirm')
+				spr.playAnim('pressed');
+			if (!holdingArray[spr.ID])
+				spr.playAnim('static');
 		});
 	}
 
@@ -2303,11 +2312,11 @@ class PlayState extends MusicBeatState
 
 		/* boyfriend.stunned = true;
 
-		// get stunned for 5 seconds
-		new FlxTimer().start(5 / 60, function(tmr:FlxTimer)
-		{
-			boyfriend.stunned = false;
-		}); */
+			// get stunned for 5 seconds
+			new FlxTimer().start(5 / 60, function(tmr:FlxTimer)
+			{
+				boyfriend.stunned = false;
+		});*/
 
 		switch (direction)
 		{
@@ -2323,26 +2332,25 @@ class PlayState extends MusicBeatState
 	}
 
 	/*function badNoteHit()
-	{
-		if (!PreferencesMenu.getPref('ghost-tapping')){
-				// just double pasting this shit cuz fuk u
-				// REDO THIS SYSTEM!
-				var leftP = controls.NOTE_LEFT_P;
-				var downP = controls.NOTE_DOWN_P;
-				var upP = controls.NOTE_UP_P;
-				var rightP = controls.NOTE_RIGHT_P;
-	
-				if (leftP)
-					noteMiss(0);
-				if (downP)
-					noteMiss(1);
-				if (upP)
-					noteMiss(2);
-				if (rightP)
-					noteMiss(3);
-		}
-	}*/
+		{
+			if (!PreferencesMenu.getPref('ghost-tapping')){
+					// just double pasting this shit cuz fuk u
+					// REDO THIS SYSTEM!
+					var leftP = controls.NOTE_LEFT_P;
+					var downP = controls.NOTE_DOWN_P;
+					var upP = controls.NOTE_UP_P;
+					var rightP = controls.NOTE_RIGHT_P;
 
+					if (leftP)
+						noteMiss(0);
+					if (downP)
+						noteMiss(1);
+					if (upP)
+						noteMiss(2);
+					if (rightP)
+						noteMiss(3);
+			}
+	}*/
 	function goodNoteHit(note:Note):Void
 	{
 		if (!note.wasGoodHit)

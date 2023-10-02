@@ -86,11 +86,11 @@ class Main extends Sprite
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, #if (flixel < "5.0.0") zoom, #end framerate, framerate, skipSplash, startFullscreen));
 
 		#if !mobile
-		fpsCounter = new FPSInfo(10, 3, 0xFFFFFF);
+		fpsCounter = new ui.FPSInfo(10, 3, 0xFFFFFF);
 		addChild(fpsCounter);
 		#end
 
-		FlxG.save.bind('funkinamp', 'charlescatyt');
+		FlxG.save.bind('fnfplusplus', 'charlescatyt');
 		PreferencesMenu.initPrefs();
 
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);

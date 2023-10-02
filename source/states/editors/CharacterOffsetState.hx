@@ -1,9 +1,8 @@
-package;
+package states.editors;
 
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
-import flixel.FlxState;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
@@ -14,10 +13,7 @@ import openfl.net.FileReference;
 
 using StringTools;
 
-/**
-	*DEBUG MODE
- */
-class AnimationDebug extends FlxState
+class CharacterOffsetState extends MusicBeatState
 {
 	var bf:Boyfriend;
 	var dad:Character;

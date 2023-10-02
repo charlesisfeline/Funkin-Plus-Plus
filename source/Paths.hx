@@ -60,6 +60,26 @@ class Paths
 		return getPath('data/$key.txt', TEXT, library);
 	}
 
+	inline static public function ndll(key:String, ?library:String)
+	{
+		return getPath('ndlls/$key.ndll', TEXT, library);
+	}
+
+	inline static public function lua(key:String, ?library:String)
+	{
+		return getPath('data/scripts/$key.lua', TEXT, library);
+	}
+
+	inline static public function hscript(key:String, ?library:String)
+	{
+		return getPath('data/scripts/$key.hx', TEXT, library);
+	}
+
+	inline static public function cpp(key:String, ?library:String)
+	{
+		return getPath('data/scripts/$key.cpp', TEXT, library);
+	}
+
 	inline static public function xml(key:String, ?library:String)
 	{
 		return getPath('data/$key.xml', TEXT, library);
