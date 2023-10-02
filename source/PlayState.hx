@@ -664,7 +664,7 @@ class PlayState extends MusicBeatState
 				dad.y += 180;
 		}
 
-		boyfriend = new Boyfriend(770, 450, SONG.player1);
+		boyfriend = new game.Boyfriend(770, 450, SONG.player1);
 
 		// REPOSITIONING PER STAGE
 		switch (curStage)
@@ -1513,9 +1513,6 @@ class PlayState extends MusicBeatState
 		else
 			iconP2.animation.curAnim.curFrame = 0;
 
-		#if debug
-		if (FlxG.keys.justPressed.ONE)
-			endSong();
 		if (FlxG.keys.justPressed.EIGHT)
 		{
 			/* 	 8 for opponent char
@@ -1523,12 +1520,15 @@ class PlayState extends MusicBeatState
 				CTRL+SHIFT+8 for gf */
 			if (FlxG.keys.pressed.SHIFT)
 				if (FlxG.keys.pressed.CONTROL)
-					FlxG.switchState(new AnimationDebug(gf.curCharacter));
+					FlxG.switchState(new CharacterOffsetState(gf.curCharacter)); // gf
 				else
-					FlxG.switchState(new AnimationDebug(SONG.player1));
+					FlxG.switchState(new CharacterOffsetState(SONG.player1)); // bf
 			else
-				FlxG.switchState(new AnimationDebug(SONG.player2));
+				FlxG.switchState(new CharacterOffsetState(SONG.player2)); // dad
 		}
+		#if debug
+		if (FlxG.keys.justPressed.ONE)
+			endSong();
 		if (FlxG.keys.justPressed.PAGEUP)
 			changeSection(1);
 		if (FlxG.keys.justPressed.PAGEDOWN)

@@ -1,0 +1,3 @@
+CharlesCatYT::Lead Programmer for Funkin++
+Starmapo::Ported FNF Week 7 to PC
+FNF Team::Made the original game

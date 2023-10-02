@@ -35,6 +35,7 @@ import Discord.DiscordClient;
 class TitleState extends MusicBeatState
 {
 	public static var initialized:Bool = false;
+
 	var startedIntro:Bool;
 
 	var blackScreen:FlxSprite;
@@ -44,6 +45,8 @@ class TitleState extends MusicBeatState
 	var ngSpr:FlxSprite;
 
 	var curWacky:Array<String> = [];
+	var nameLines:Array<String> = [];
+
 	var wackyImage:FlxSprite;
 	var lastBeat:Int = 0;
 	var swagShader:ColorSwap;
@@ -66,6 +69,7 @@ class TitleState extends MusicBeatState
 		FlxG.sound.muteKeys = [ZERO];
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
+		nameLines = FlxG.random.getObject(funkyText());
 
 		// DEBUG BULLSHIT
 
@@ -235,6 +239,21 @@ class TitleState extends MusicBeatState
 		startedIntro = true;
 	}
 
+	function funkyText():Array<Array<String>>
+	{
+		var fullText:String = Assets.getText(Paths.txt('nameText'));
+
+		var firstArray:Array<String> = fullText.split('\n');
+		var swagGoodArray:Array<Array<String>> = [];
+
+		for (i in firstArray)
+		{
+			swagGoodArray.push(i.split('--'));
+		}
+
+		return swagGoodArray;
+	}
+
 	function getIntroTextShit():Array<Array<String>>
 	{
 		var fullText:String = Assets.getText(Paths.txt('introText'));
@@ -254,7 +273,6 @@ class TitleState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 
@@ -296,7 +314,7 @@ class TitleState extends MusicBeatState
 
 		if (pressedEnter && !skippedIntro && initialized)
 			skipIntro();
-		
+
 		if (controls.UI_LEFT)
 			swagShader.update(-elapsed * 0.1);
 
@@ -343,7 +361,7 @@ class TitleState extends MusicBeatState
 		super.beatHit();
 
 		if (!startedIntro)
-			return ;
+			return;
 
 		if (skippedIntro)
 		{
@@ -393,23 +411,16 @@ class TitleState extends MusicBeatState
 						// credTextShit.screenCenter();
 						case 9:
 							createCoolText([curWacky[0]]);
-						// credTextShit.visible = true;
 						case 11:
 							addMoreText(curWacky[1]);
-						// credTextShit.text += '\nlmao';
 						case 12:
 							deleteCoolText();
-						// credTextShit.visible = false;
-						// credTextShit.text = "Friday";
-						// credTextShit.screenCenter();
 						case 13:
-							addMoreText('Friday');
-						// credTextShit.visible = true;
+							addMoreText(nameLines[0]);
 						case 14:
-							addMoreText('Night');
-						// credTextShit.text += '\nNight';
+							addMoreText(nameLines[1]);
 						case 15:
-							addMoreText('Funkin'); // credTextShit.text += '\nFunkin';
+							addMoreText(nameLines[2]);
 
 						case 16:
 							skipIntro();

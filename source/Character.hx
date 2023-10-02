@@ -7,11 +7,6 @@ import flixel.util.FlxSort;
 
 using StringTools;
 
-typedef CharacterData =
-{
-	var scale:Float = 1;
-}
-
 class Character extends FlxSprite
 {
 	public var animOffsets:Map<String, Array<Dynamic>>;
@@ -136,7 +131,7 @@ class Character extends FlxSprite
 				// DAD ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('characters/DADDY_DEAREST');
 				frames = tex;
-				quickAnimAdd('idle', 'Dad idle dance');
+				quickAnimAdd('idle', 'Dad idle dance', 30);
 				quickAnimAdd('singUP', 'Dad Sing Note UP');
 				quickAnimAdd('singRIGHT', 'Dad Sing Note RIGHT');
 				quickAnimAdd('singDOWN', 'Dad Sing Note DOWN');
@@ -382,7 +377,7 @@ class Character extends FlxSprite
 
 			case 'senpai':
 				frames = Paths.getSparrowAtlas('characters/senpai');
-				quickAnimAdd('idle', 'Senpai Idle');
+				quickAnimAdd('idle', 'Senpai Idle', 18);
 				// at framerate 16.8 animation plays over 2 beats at 144bpm,
 				// but if the game lags or the bpm is > 144 (mods etc.)
 				// he may miss his next dance
@@ -403,7 +398,7 @@ class Character extends FlxSprite
 				antialiasing = false;
 			case 'senpai-angry':
 				frames = Paths.getSparrowAtlas('characters/senpai');
-				quickAnimAdd('idle', 'Angry Senpai Idle');
+				quickAnimAdd('idle', 'Angry Senpai Idle', 18);
 				quickAnimAdd('singUP', 'Angry Senpai UP NOTE');
 				quickAnimAdd('singLEFT', 'Angry Senpai LEFT NOTE');
 				quickAnimAdd('singRIGHT', 'Angry Senpai RIGHT NOTE');
@@ -541,9 +536,16 @@ class Character extends FlxSprite
 		return FlxSort.byValues(FlxSort.ASCENDING, val1[0], val2[0]);
 	}
 
-	function quickAnimAdd(name:String, prefix:String)
+	function quickAnimAdd(name:String, prefix:String, ?framerate:Int)
 	{
-		animation.addByPrefix(name, prefix, 24, false);
+		if (framerate != null)
+		{
+			animation.addByPrefix(name, prefix, framerate, false);
+		}
+		else
+		{
+			animation.addByPrefix(name, prefix, 24, false);
+		}
 	}
 
 	private function loadOffsetFile(offsetCharacter:String)

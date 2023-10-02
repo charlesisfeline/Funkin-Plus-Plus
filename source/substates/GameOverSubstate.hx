@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import game.Boyfriend;
 import ui.PreferencesMenu;
 
 class GameOverSubstate extends MusicBeatSubstate
@@ -91,7 +92,7 @@ class GameOverSubstate extends MusicBeatSubstate
 
 		#if debug
 		if (FlxG.keys.justPressed.EIGHT)
-			FlxG.switchState(new AnimationDebug(bf.curCharacter));
+			FlxG.switchState(new CharacterOffsetState(bf.curCharacter));
 		#end
 
 		if (bf.animation.curAnim.name == 'firstDeath' && bf.animation.curAnim.curFrame == 12)

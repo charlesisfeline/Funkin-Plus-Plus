@@ -7,6 +7,7 @@ import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import game.Boyfriend;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import openfl.net.FileReference;
@@ -138,6 +139,11 @@ class CharacterOffsetState extends MusicBeatState
 		else
 		{
 			camFollow.velocity.set();
+		}
+
+		if (controls.ACCEPT)
+		{
+			FlxG.switchState(new MainMenuState());
 		}
 
 		if (FlxG.keys.justPressed.W)
