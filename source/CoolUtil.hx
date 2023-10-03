@@ -55,7 +55,7 @@ class CoolUtil
 				}
 				catch (e)
 				{
-					Logs.trace("Could not delete " + delete + "/" + file, WARNING);
+					trace("Could not delete " + delete + "/" + file);
 				}
 			}
 		}
