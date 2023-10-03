@@ -28,6 +28,7 @@ class Main extends Sprite
 	#else
 	var framerate:Int = 144; // How many frames per second the game should run at.
 	#end
+		var zoom:Int = -1;
 	var skipSplash:Bool = true; // Whether to skip the flixel splash screen that appears in release mode.
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 
@@ -83,7 +84,7 @@ class Main extends Sprite
 		initialState = TitleState;
 		#end
 
-		addChild(new FlxGame(gameWidth, gameHeight, initialState, #if (flixel < "5.0.0") zoom, #end framerate, framerate, skipSplash, startFullscreen));
+		addChild(new FlxGame(gameWidth, gameHeight, initialState, /*zoom*/, framerate, framerate, skipSplash, startFullscreen));
 
 		setFPS();
 
