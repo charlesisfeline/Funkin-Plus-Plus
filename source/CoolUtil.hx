@@ -175,9 +175,6 @@ class CoolUtil
 		return daList;
 	}
 
-	public static inline function blueBalls():Int
-		return PlayState.instance.deaths;
-
 	public static inline function coolStringFile(path:String):Array<String>
 		return [for (i in path.trim().split('\n')) i];
 
