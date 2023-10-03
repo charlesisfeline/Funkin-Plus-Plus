@@ -101,7 +101,7 @@ class Main extends Sprite
 
 	inline public static function resetState()
 	{
-		switchState(FlxG.state);
+		FlxG.switchState(FlxG.state);
 	}
 
 	function setFPS()
@@ -164,7 +164,7 @@ class Main extends Sprite
 		Sys.println("Crash dump saved in " + Path.normalize(path));
 
 		Application.current.window.alert(errMsg, "Error!");
-		DiscordClient.shutdown();
+		Discord.DiscordClient.shutdown();
 		Sys.exit(1);
 	}
 	#end
