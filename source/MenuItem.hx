@@ -34,7 +34,14 @@ class MenuItem extends FlxSpriteGroup
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-		y = CoolUtil.coolLerp(y, (targetY * 120) + 480, 0.17);
+		if (MainMenuState.currentFPS == 1)
+			y = FlxMath.lerp(y, (targetY * 120) + 480, 0.34);
+		if (MainMenuState.currentFPS == 2)
+			y = FlxMath.lerp(y, (targetY * 120) + 480, 0.17);
+		if (MainMenuState.currentFPS == 3)
+			y = FlxMath.lerp(y, (targetY * 120) + 480, 0.085);
+		if (MainMenuState.currentFPS == 4)
+			y = FlxMath.lerp(y, (targetY * 120) + 480, 0.0425);
 
 		if (isFlashing)
 			flashingInt += 1;

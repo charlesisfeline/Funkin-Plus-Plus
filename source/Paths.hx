@@ -130,6 +130,16 @@ class Paths
 		return 'assets/fonts/$key';
 	}
 
+	inline static public function module(key:String)
+	{
+		return file('data/libs/$key.lua');
+	}
+
+	inline static public function getModule(key:String, mod:String)
+	{
+		return file('data/libs/$key.lua', mod);
+	}
+
 	inline static public function getSparrowAtlas(key:String, ?library:String)
 	{
 		return FlxAtlasFrames.fromSparrow(image(key, library), file('images/$key.xml', library));

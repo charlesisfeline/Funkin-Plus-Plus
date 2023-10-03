@@ -85,6 +85,8 @@ class Main extends Sprite
 
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, #if (flixel < "5.0.0") zoom, #end framerate, framerate, skipSplash, startFullscreen));
 
+		setFPS();
+
 		#if !mobile
 		fpsCounter = new ui.FPSInfo(10, 3, 0xFFFFFF);
 		addChild(fpsCounter);
@@ -96,12 +98,48 @@ class Main extends Sprite
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 	}
 
+	inline public static function resetState()
+	{
+		switchState(FlxG.state);
+	}
+
+	function setFPS()
+	{
+		MainMenuState.currentFPS = FlxG.save.data.currentFPS;
+
+		if (MainMenuState.currentFPS == 1)
+		{
+			FlxG.updateFramerate = 30;
+			FlxG.drawFramerate = 30;
+		}
+
+		if (MainMenuState.currentFPS == 2)
+		{
+			FlxG.updateFramerate = 60;
+			FlxG.drawFramerate = 60;
+		}
+
+		if (MainMenuState.currentFPS == 3)
+		{
+			FlxG.updateFramerate = 120;
+			FlxG.drawFramerate = 120;
+		}
+
+		if (MainMenuState.currentFPS == 4)
+		{
+			FlxG.updateFramerate = 240;
+			FlxG.drawFramerate = 240;
+		}
+	}
+
 	#if CRASH_HANDLER
+	static final crashHandlerDirectory:String = './crash/';
+
 	// crash handler made by sqirra-rng
 	function onCrash(e:UncaughtErrorEvent):Void
 	{
 		var errMsg:String = "";
-		var path:String = "./crash/" + "cookieEngine_" + Date.now().toString().replace(" ", "_").replace(":", "'") + ".txt";
+		var path:String = crashHandlerDirectory + "FNF_" + Date.now().toString().replace(" ", "_").replace(":", "'") + ".txt";
 
 		for (stackItem in CallStack.exceptionStack(true))
 		{
@@ -114,10 +152,10 @@ class Main extends Sprite
 			}
 		}
 
-		errMsg += "\nUncaught Error: " + e.error ;
+		errMsg += "\nUncaught Error: " + e.error;
 
-		if (!FileSystem.exists("./crash/"))
-			FileSystem.createDirectory("./crash/");
+		if (!FileSystem.exists(crashHandlerDirectory))
+			FileSystem.createDirectory(crashHandlerDirectory);
 
 		File.saveContent(path, errMsg + "\n");
 

@@ -38,6 +38,8 @@ import Discord.DiscordClient;
 
 class PlayState extends MusicBeatState
 {
+	public static var instance:PlayState;
+
 	public static var curStage:String = '';
 	public static var SONG:SwagSong;
 	public static var isStoryMode:Bool = false;
@@ -154,6 +156,8 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+		instance = this;
+		
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 
@@ -778,7 +782,14 @@ class PlayState extends MusicBeatState
 
 		add(camFollow);
 
-		FlxG.camera.follow(camFollow, LOCKON, 0.04);
+		if (MainMenuState.currentFPS == 1)
+			FlxG.camera.follow(camFollow, LOCKON, 0.16);
+		if (MainMenuState.currentFPS == 2)
+			FlxG.camera.follow(camFollow, LOCKON, 0.04);
+		if (MainMenuState.currentFPS == 3)
+			FlxG.camera.follow(camFollow, LOCKON, 0.01);
+		if (MainMenuState.currentFPS == 4)
+			FlxG.camera.follow(camFollow, LOCKON, 0.0025);
 		// FlxG.camera.setScrollBounds(0, FlxG.width, 0, FlxG.height);
 		FlxG.camera.zoom = defaultCamZoom;
 		FlxG.camera.focusOn(camFollow.getPosition());

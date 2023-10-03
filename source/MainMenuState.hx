@@ -19,14 +19,16 @@ import ui.OptionsState;
 import ui.PreferencesMenu;
 
 using StringTools;
+
 #if discord_rpc
 import Discord.DiscordClient;
 #end
 
-
 class MainMenuState extends MusicBeatState
 {
 	var menuItems:MainMenuList;
+
+	public static var currentFPS:Int = 2;
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
@@ -155,6 +157,39 @@ class MainMenuState extends MusicBeatState
 		new FlxTimer().start(duration, function(_) FlxG.switchState(state));
 	}
 
+	function changeFPS()
+	{
+		FlxG.save.data.currentFPS = currentFPS;
+
+		if (FlxG.keys.justPressed.NUMPADONE)
+		{
+			FlxG.updateFramerate = 30;
+			FlxG.drawFramerate = 30;
+			currentFPS = 1;
+		}
+
+		if (FlxG.keys.justPressed.NUMPADTWO)
+		{
+			FlxG.updateFramerate = 60;
+			FlxG.drawFramerate = 60;
+			currentFPS = 2;
+		}
+
+		if (FlxG.keys.justPressed.NUMPADTHREE)
+		{
+			FlxG.updateFramerate = 120;
+			FlxG.drawFramerate = 120;
+			currentFPS = 3;
+		}
+
+		if (FlxG.keys.justPressed.NUMPADFOUR)
+		{
+			FlxG.updateFramerate = 240;
+			FlxG.drawFramerate = 240;
+			currentFPS = 4;
+		}
+	}
+
 	override function update(elapsed:Float)
 	{
 		if (FlxG.sound.music.volume < 0.8)
@@ -164,6 +199,18 @@ class MainMenuState extends MusicBeatState
 
 		if (_exiting)
 			menuItems.enabled = false;
+
+		changeFPS();
+
+		if (FlxG.keys.justPressed.O)
+		{
+			FlxG.switchState(new ui.OptionsState());
+		}
+
+		if (FlxG.keys.justPressed.F)
+		{
+			FlxG.switchState(new FreeplayState());
+		}
 
 		if (controls.BACK && menuItems.enabled && !menuItems.busy)
 		{
