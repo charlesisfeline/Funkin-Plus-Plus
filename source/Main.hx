@@ -62,7 +62,7 @@ class Main extends Sprite
 	private var overlay:Sprite;
 
 	#if !mobile
-	public static var fpsCounter:CoolCounter;
+	public static var fpsCounter:FPSInfo;
 	#end
 
 	private function setupGame():Void
