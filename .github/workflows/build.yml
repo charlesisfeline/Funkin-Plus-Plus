@@ -22,19 +22,19 @@ jobs:
           sudo apt-get install libvlc-dev
           sudo apt-get install libvlccore-dev
           haxelib setup ~/haxelib
-          haxelib install lime
-          haxelib install openfl
-          haxelib install flixel
-          haxelib run lime setup
-          haxelib run lime setup flixel
-          haxelib install flixel-tools
-          haxelib install flixel-ui
-          haxelib install flixel-addons
-          haxelib install hxCodec
-          haxelib install format
-          haxelib install hscript
-          haxelib install tjson
-          haxelib install hxcpp-debug-server
+          haxelib install lime --quiet
+          haxelib install openfl --quiet
+          haxelib install flixel --quiet
+          haxelib run lime setup --quiet
+          haxelib run lime setup flixel --quiet
+          haxelib install flixel-tools --quiet
+          haxelib install flixel-ui --quiet
+          haxelib install flixel-addons --quiet
+          haxelib install hxCodec --quiet
+          haxelib install format --quiet
+          haxelib install hscript --quiet
+          haxelib install tjson --quiet
+          haxelib install hxcpp-debug-server --quiet
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
       - name: Compile
         run: haxelib run lime build linux
@@ -55,19 +55,19 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup C:/haxelib
-          haxelib install lime
-          haxelib install openfl
-          haxelib install flixel
-          haxelib run lime setup
-          haxelib run lime setup flixel
-          haxelib install flixel-tools
-          haxelib install flixel-ui
-          haxelib install flixel-addons
-          haxelib install hxCodec
-          haxelib install hscript
-          haxelib install format
-          haxelib install tjson
-          haxelib install hxcpp-debug-server
+          haxelib install lime --quiet
+          haxelib install openfl --quiet
+          haxelib install flixel --quiet
+          haxelib run lime setup --quiet
+          haxelib run lime setup flixel --quiet
+          haxelib install flixel-tools --quiet
+          haxelib install flixel-ui --quiet
+          haxelib install flixel-addons --quiet
+          haxelib install hxCodec --quiet 
+          haxelib install hscript --quiet
+          haxelib install format --quiet
+          haxelib install tjson --quiet
+          haxelib install hxcpp-debug-server --quiet
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
         shell: cmd
       - name: Compile
@@ -89,19 +89,19 @@ jobs:
       - name: Install Haxelib
         run: |
           haxelib setup ~/haxelib
-          haxelib install lime
-          haxelib install openfl
-          haxelib install flixel
-          haxelib run lime setup
-          haxelib run lime setup flixel
-          haxelib install flixel-tools
-          haxelib install flixel-ui
-          haxelib install flixel-addons
-          haxelib install format
-          haxelib install hxCodec
-          haxelib install hscript
-          haxelib install hxcpp-debug-server
-          haxelib install tjson
+          haxelib install lime --quiet
+          haxelib install openfl --quiet
+          haxelib install flixel --quiet
+          haxelib run lime setup --quiet
+          haxelib run lime setup flixel --quiet
+          haxelib install flixel-tools --quiet
+          haxelib install flixel-ui --quiet
+          haxelib install flixel-addons --quiet
+          haxelib install format --quiet
+          haxelib install hxCodec --quiet
+          haxelib install hscript --quiet
+          haxelib install hxcpp-debug-server --quiet
+          haxelib install tjson --quiet
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
       - name: Compile
         run: haxelib run lime build mac
