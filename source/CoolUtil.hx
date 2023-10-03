@@ -90,7 +90,7 @@ class CoolUtil
 	 */
 	public static function getSizeString(size:Float):String
 	{
-		var labels = ["B", "KB", "MB", "GB", "TB", "PB";
+		var labels = ["B", "KB", "MB", "GB", "TB", "PB"];
 		var rSize:Float = size;
 		var label:Int = 0;
 		while (rSize > 1024 && label < labels.length - 1)
