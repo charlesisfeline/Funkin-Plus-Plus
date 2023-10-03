@@ -27,6 +27,20 @@ class Note extends FlxSprite
 
 	public var colorSwap:ColorSwap;
 	public var noteScore:Float = 1;
+	public var distance:Float = 2000;
+
+	public var offsetX:Float = 0;
+	public var offsetY:Float = 0;
+	public var offsetAngle:Float = 0;
+	public var multAlpha:Float = 1;
+	public var multSpeed(default, set):Float = 1;
+
+	public var copyX:Bool = true;
+	public var copyY:Bool = true;
+	public var copyAngle:Bool = true;
+	public var copyAlpha:Bool = true;
+
+	public var endHoldOffset:Float = Math.NEGATIVE_INFINITY;
 
 	public static var swagWidth:Float = 160 * 0.7;
 	public static var PURP_NOTE:Int = 0;
@@ -35,6 +49,23 @@ class Note extends FlxSprite
 	public static var RED_NOTE:Int = 3;
 
 	public static var arrowColors:Array<Float> = [1, 1, 1, 1];
+
+	inline private function set_multSpeed(value:Float):Float
+	{
+		resizeByRatio(value / multSpeed);
+		multSpeed = value;
+		// trace('fuck cock');
+		return value;
+	}
+
+	public function resizeByRatio(ratio:Float) // haha funny twitter shit
+	{
+		if (isSustainNote && !animation.curAnim.name.endsWith('end'))
+		{
+			scale.y *= ratio;
+			updateHitbox();
+		}
+	}
 
 	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false)
 	{

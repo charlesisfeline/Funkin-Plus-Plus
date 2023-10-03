@@ -1,8 +1,11 @@
 package;
 
 #if !marco
+import CoolUtil;
+import Discord;
 import MusicBeatState;
 import MusicBeatSubstate;
+import NativeUtil;
 import Paths;
 import flixel.*;
 import flixel.FlxG;
@@ -15,6 +18,7 @@ import openfl.*;
 import shaders.*;
 import states.*;
 import states.FreeplayState;
+import states.MainMenuState;
 import states.StoryMenuState;
 import states.editors.*;
 import substates.*;

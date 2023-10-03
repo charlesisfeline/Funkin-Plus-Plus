@@ -126,10 +126,7 @@ class PlayState extends MusicBeatState
 	var songScore:Int = 0;
 	var songMisses:Int = 0;
 	var scoreTxt:FlxText;
-	private var accuracy:Float = 0.00;
-	private var totalNotesHit:Float = 0;
-	private var totalPlayed:Int = 0;
-	private var ss:Bool = false;
+	public var isSick:Bool = true;
 
 	var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
 
@@ -1995,6 +1992,8 @@ class PlayState extends MusicBeatState
 		}
 	}
 
+	var comboSpr:FlxSprite;
+
 	// gives score and pops up rating
 	private function popUpScore(strumtime:Float, daNote:Note):Void
 	{
@@ -2006,8 +2005,6 @@ class PlayState extends MusicBeatState
 		var score:Int = 350;
 
 		var daRating:String = "sick";
-
-		var isSick:Bool = true;
 
 		if (noteDiff > Conductor.safeZoneOffset * 0.9)
 		{
@@ -2109,7 +2106,7 @@ class PlayState extends MusicBeatState
 			pixelShitPart2 = '-pixel';
 		}
 
-		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
+		comboSpr = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
 		comboSpr.y = FlxG.camera.scroll.y + FlxG.camera.height * 0.4 + 80;
 		comboSpr.x = FlxG.width * 0.55;
 		// make sure combo is visible lol!
@@ -2341,7 +2338,7 @@ class PlayState extends MusicBeatState
 
 		playerStrums.forEach(function(spr:StrumNote)
 		{
-			if (controlArray[spr.ID] && spr.animation.curAnim.name != 'confirm')
+			if (pressArray[spr.ID] && spr.animation.curAnim.name != 'confirm')
 				spr.playAnim('pressed');
 			if (!holdingArray[spr.ID])
 				spr.playAnim('static');
