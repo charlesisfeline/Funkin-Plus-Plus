@@ -31,10 +31,10 @@ import shaders.BuildingShaders;
 import ui.PreferencesMenu;
 
 using StringTools;
+
 #if discord_rpc
 import Discord.DiscordClient;
 #end
-
 
 class PlayState extends MusicBeatState
 {
@@ -75,6 +75,10 @@ class PlayState extends MusicBeatState
 	private var gfSpeed:Int = 1;
 	private var health:Float = 1;
 	private var combo:Int = 0;
+	private var accuracy:Float = 0.00;
+	private var totalNotesHit:Float = 0;
+	private var totalPlayed:Int = 0;
+	private var ss:Bool = false;
 
 	private var healthBarBG:FlxSprite;
 	private var healthBar:FlxBar;
@@ -120,6 +124,10 @@ class PlayState extends MusicBeatState
 	var songScore:Int = 0;
 	var songMisses:Int = 0;
 	var scoreTxt:FlxText;
+	private var accuracy:Float = 0.00;
+	private var totalNotesHit:Float = 0;
+	private var totalPlayed:Int = 0;
+	private var ss:Bool = false;
 
 	var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
 
@@ -217,7 +225,7 @@ class PlayState extends MusicBeatState
 				halloweenBG.animation.addByPrefix('idle', 'halloweem bg0');
 				halloweenBG.animation.addByPrefix('lightning', 'halloweem bg lightning strike', 24, false);
 				halloweenBG.animation.play('idle');
-				halloweenBG.antialiasing = true;
+				halloweenBG.antialiasing = PreferencesMenu.getPref('antialiasing');
 				add(halloweenBG);
 
 				isHalloween = true;
@@ -246,7 +254,7 @@ class PlayState extends MusicBeatState
 					light.visible = false;
 					light.setGraphicSize(Std.int(light.width * 0.85));
 					light.updateHitbox();
-					light.antialiasing = true;
+					light.antialiasing = PreferencesMenu.getPref('antialiasing');
 					light.shader = lightFadeShader.shader;
 					phillyCityLights.add(light);
 				}
@@ -293,7 +301,7 @@ class PlayState extends MusicBeatState
 				limo.frames = Paths.getSparrowAtlas('limo/limoDrive');
 				limo.animation.addByPrefix('drive', "Limo stage", 24);
 				limo.animation.play('drive');
-				limo.antialiasing = true;
+				limo.antialiasing = PreferencesMenu.getPref('antialiasing');
 
 				fastCar = new FlxSprite(-300, 160).loadGraphic(Paths.image('limo/fastCarLol'));
 			// add(limo);
@@ -303,7 +311,7 @@ class PlayState extends MusicBeatState
 				defaultCamZoom = 0.80;
 
 				var bg:FlxSprite = new FlxSprite(-1000, -500).loadGraphic(Paths.image('christmas/bgWalls'));
-				bg.antialiasing = true;
+				bg.antialiasing = PreferencesMenu.getPref('antialiasing');
 				bg.scrollFactor.set(0.2, 0.2);
 				bg.active = false;
 				bg.setGraphicSize(Std.int(bg.width * 0.8));
@@ -313,14 +321,14 @@ class PlayState extends MusicBeatState
 				upperBoppers = new FlxSprite(-240, -90);
 				upperBoppers.frames = Paths.getSparrowAtlas('christmas/upperBop');
 				upperBoppers.animation.addByPrefix('bop', "Upper Crowd Bob", 24, false);
-				upperBoppers.antialiasing = true;
+				upperBoppers.antialiasing = PreferencesMenu.getPref('antialiasing');
 				upperBoppers.scrollFactor.set(0.33, 0.33);
 				upperBoppers.setGraphicSize(Std.int(upperBoppers.width * 0.85));
 				upperBoppers.updateHitbox();
 				add(upperBoppers);
 
 				var bgEscalator:FlxSprite = new FlxSprite(-1100, -600).loadGraphic(Paths.image('christmas/bgEscalator'));
-				bgEscalator.antialiasing = true;
+				bgEscalator.antialiasing = PreferencesMenu.getPref('antialiasing');
 				bgEscalator.scrollFactor.set(0.3, 0.3);
 				bgEscalator.active = false;
 				bgEscalator.setGraphicSize(Std.int(bgEscalator.width * 0.9));
@@ -328,14 +336,14 @@ class PlayState extends MusicBeatState
 				add(bgEscalator);
 
 				var tree:FlxSprite = new FlxSprite(370, -250).loadGraphic(Paths.image('christmas/christmasTree'));
-				tree.antialiasing = true;
+				tree.antialiasing = PreferencesMenu.getPref('antialiasing');
 				tree.scrollFactor.set(0.40, 0.40);
 				add(tree);
 
 				bottomBoppers = new FlxSprite(-300, 140);
 				bottomBoppers.frames = Paths.getSparrowAtlas('christmas/bottomBop');
 				bottomBoppers.animation.addByPrefix('bop', 'Bottom Level Boppers', 24, false);
-				bottomBoppers.antialiasing = true;
+				bottomBoppers.antialiasing = PreferencesMenu.getPref('antialiasing');
 				bottomBoppers.scrollFactor.set(0.9, 0.9);
 				bottomBoppers.setGraphicSize(Std.int(bottomBoppers.width * 1));
 				bottomBoppers.updateHitbox();
@@ -343,18 +351,18 @@ class PlayState extends MusicBeatState
 
 				var fgSnow:FlxSprite = new FlxSprite(-600, 700).loadGraphic(Paths.image('christmas/fgSnow'));
 				fgSnow.active = false;
-				fgSnow.antialiasing = true;
+				fgSnow.antialiasing = PreferencesMenu.getPref('antialiasing');
 				add(fgSnow);
 
 				santa = new FlxSprite(-840, 150);
 				santa.frames = Paths.getSparrowAtlas('christmas/santa');
 				santa.animation.addByPrefix('idle', 'santa idle in fear', 24, false);
-				santa.antialiasing = true;
+				santa.antialiasing = PreferencesMenu.getPref('antialiasing');
 				add(santa);
 			case 'winter-horrorland':
 				curStage = 'mallEvil';
 				var bg:FlxSprite = new FlxSprite(-400, -500).loadGraphic(Paths.image('christmas/evilBG'));
-				bg.antialiasing = true;
+				bg.antialiasing = PreferencesMenu.getPref('antialiasing');
 				bg.scrollFactor.set(0.2, 0.2);
 				bg.active = false;
 				bg.setGraphicSize(Std.int(bg.width * 0.8));
@@ -362,12 +370,12 @@ class PlayState extends MusicBeatState
 				add(bg);
 
 				var evilTree:FlxSprite = new FlxSprite(300, -300).loadGraphic(Paths.image('christmas/evilTree'));
-				evilTree.antialiasing = true;
+				evilTree.antialiasing = PreferencesMenu.getPref('antialiasing');
 				evilTree.scrollFactor.set(0.2, 0.2);
 				add(evilTree);
 
 				var evilSnow:FlxSprite = new FlxSprite(-200, 700).loadGraphic(Paths.image("christmas/evilSnow"));
-				evilSnow.antialiasing = true;
+				evilSnow.antialiasing = PreferencesMenu.getPref('antialiasing');
 				add(evilSnow);
 			case 'senpai' | 'roses':
 				curStage = 'school';
@@ -566,7 +574,7 @@ class PlayState extends MusicBeatState
 				var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront'));
 				stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
 				stageFront.updateHitbox();
-				stageFront.antialiasing = true;
+				stageFront.antialiasing = PreferencesMenu.getPref('antialiasing');
 				stageFront.scrollFactor.set(0.9, 0.9);
 				stageFront.active = false;
 				add(stageFront);
@@ -574,7 +582,7 @@ class PlayState extends MusicBeatState
 				var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
 				stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
 				stageCurtains.updateHitbox();
-				stageCurtains.antialiasing = true;
+				stageCurtains.antialiasing = PreferencesMenu.getPref('antialiasing');
 				stageCurtains.scrollFactor.set(1.3, 1.3);
 				stageCurtains.active = false;
 
@@ -794,7 +802,7 @@ class PlayState extends MusicBeatState
 		// healthBar
 		add(healthBar);
 
-		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width - 190, healthBarBG.y + 30, 0, "", 20);
+		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 150, healthBarBG.y + 30, 0, "", 20);
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		add(scoreTxt);
@@ -1385,6 +1393,31 @@ class PlayState extends MusicBeatState
 	var startedCountdown:Bool = false;
 	var canPause:Bool = true;
 
+	function updateAccuracy()
+	{
+		totalPlayed += 1;
+		accuracy = totalNotesHit / totalPlayed * 100;
+		trace(totalNotesHit + '/' + totalPlayed + '* 100 = ' + accuracy);
+		if (accuracy >= 100.00)
+		{
+			if (isSick && misses == 0)
+				accuracy = 100.00;
+			else
+			{
+				accuracy = 99.98;
+				isSick = false;
+			}
+		}
+	}
+
+	function truncateFloat(number:Float, precision:Int):Float
+	{
+		var num = number;
+		num = num * Math.pow(10, precision);
+		num = Math.round(num) / Math.pow(10, precision);
+		return num;
+	}
+
 	override public function update(elapsed:Float)
 	{
 		// makes the lerp non-dependant on the framerate
@@ -1449,7 +1482,7 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
-		scoreTxt.text = 'Score: $songScore // Health: $health // Misses: $songMisses';
+		scoreTxt.text = 'Score: $songScore // Health: $health // Misses: $songMisses // | Accuracy: ' + truncateFloat(accuracy, 2) + "%";
 
 		if (controls.PAUSE && startedCountdown && canPause)
 		{
@@ -1805,6 +1838,7 @@ class PlayState extends MusicBeatState
 
 							vocals.volume = 0;
 							killCombo();
+							updateAccuracy();
 						}
 
 						daNote.active = false;
@@ -1967,6 +2001,7 @@ class PlayState extends MusicBeatState
 		if (noteDiff > Conductor.safeZoneOffset * 0.9)
 		{
 			daRating = 'shit';
+			totalNotesHit += 0.05;
 			score = 50;
 			isSick = false; // shitty copypaste on this literally just because im lazy and tired lol!
 		}
@@ -1974,14 +2009,18 @@ class PlayState extends MusicBeatState
 		{
 			daRating = 'bad';
 			score = 100;
+			totalNotesHit += 0.10;
 			isSick = false;
 		}
 		else if (noteDiff > Conductor.safeZoneOffset * 0.2)
 		{
 			daRating = 'good';
+			totalNotesHit += 0.65;
 			score = 200;
 			isSick = false;
 		}
+		if (daRating == 'sick')
+			totalNotesHit += 1;
 
 		if (isSick)
 		{
@@ -2033,7 +2072,7 @@ class PlayState extends MusicBeatState
 		else
 		{
 			rating.setGraphicSize(Std.int(rating.width * 0.7));
-			rating.antialiasing = true;
+			rating.antialiasing = PreferencesMenu.getPref('antialiasing');
 		}
 		rating.updateHitbox();
 
@@ -2082,7 +2121,7 @@ class PlayState extends MusicBeatState
 		else
 		{
 			comboSpr.setGraphicSize(Std.int(comboSpr.width * 0.7));
-			comboSpr.antialiasing = true;
+			comboSpr.antialiasing = PreferencesMenu.getPref('antialiasing');
 		}
 		comboSpr.updateHitbox();
 
@@ -2119,7 +2158,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				numScore.antialiasing = true;
+				numScore.antialiasing = PreferencesMenu.getPref('antialiasing');
 				numScore.setGraphicSize(Std.int(numScore.width * 0.5));
 			}
 			numScore.updateHitbox();
@@ -2360,6 +2399,8 @@ class PlayState extends MusicBeatState
 				combo += 1;
 				popUpScore(note.strumTime, note);
 			}
+			else
+				totalNotesHit += 1;
 
 			if (note.noteData >= 0)
 				health += 0.023;
@@ -2395,6 +2436,7 @@ class PlayState extends MusicBeatState
 				notes.remove(note, true);
 				note.destroy();
 			}
+			updateAccuracy();
 		}
 	}
 

@@ -81,7 +81,7 @@ class FlxSymbol extends FlxSprite
 							spr.origin.x += origin.x;
 							spr.origin.y += origin.y;
 
-							spr.antialiasing = true;
+							spr.antialiasing = PreferencesMenu.getPref('antialiasing');
 							spr.draw();
 						}
 						else

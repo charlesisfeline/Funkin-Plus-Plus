@@ -17,6 +17,7 @@ class PreferencesMenu extends ui.OptionsState.Page
 		['flashing lights', 'flashing-menu', true],
 		['camera zooms', 'camera-zoom', true],
 		['ghost tapping', 'ghost-tapping', true],
+		['antialiasing', 'antialiasing', true], 
 		#if !mobile
 		['fps counter', 'fps-counter', true], 
 		['memory counter', 'mem-counter', true], 
@@ -192,7 +193,7 @@ class CheckboxThingie extends FlxSprite
 		animation.addByPrefix('static', 'Check Box unselected', 24, false);
 		animation.addByPrefix('checked', 'Check Box selecting animation', 24, false);
 
-		antialiasing = true;
+		antialiasing = PreferencesMenu.getPref('antialiasing');
 
 		setGraphicSize(Std.int(width * 0.7));
 		updateHitbox();

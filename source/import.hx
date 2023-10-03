@@ -19,6 +19,7 @@ import states.StoryMenuState;
 import states.editors.*;
 import substates.*;
 import ui.*;
+import ui.PreferencesMenu;
 
 using StringTools;
 #end

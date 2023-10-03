@@ -183,7 +183,6 @@ class CoolUtil
 		var tempMult:Float = 1;
 		for (i in 0...decimals)
 			tempMult *= 10;
-
 		var newValue:Float = Math.floor(value * tempMult);
 		return newValue / tempMult;
 	}

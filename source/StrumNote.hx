@@ -35,7 +35,7 @@ class StrumNote extends FlxSprite
 
 			setGraphicSize(Std.int(width * PlayState.daPixelZoom));
 			updateHitbox();
-			antialiasing = false;
+			antialiasing = PreferencesMenu.getPref('antialiasing');
 
 			switch (noteData)
 			{
@@ -61,7 +61,7 @@ class StrumNote extends FlxSprite
 		{
 			frames = Paths.getSparrowAtlas('NOTE_assets');
 
-			antialiasing = true;
+			antialiasing = PreferencesMenu.getPref('antialiasing');
 			setGraphicSize(Std.int(width * 0.7));
 
 			switch (Math.abs(noteData) % 4)
