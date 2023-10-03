@@ -29,6 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Implemented [hxCodec](https://github.com/polybiusproxy/hxCodec) for playing videos natively.
 - Slightly more softcoded dialogue, still only Senpai though.
 - Credits menu.
+- New options: Ghost Tapping and Antialiasing.
 
 ### Changed
 
@@ -37,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Re-enabled Discord Rich Presence for CPP builds.
 - Updated Haxe and libraries to the latest versions.
 - The starting note splash for precaching is now more transparent.
+- Some code has reorganized.
 
 ### Removed
 
