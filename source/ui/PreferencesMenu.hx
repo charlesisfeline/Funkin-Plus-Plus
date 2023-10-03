@@ -175,7 +175,7 @@ class PreferencesMenu extends ui.OptionsState.Page
 		});
 	}
 
-	private static function preferenceCheck(prefString:String, prefValue:Dynamic):Void
+	private static function preferenceCheck(identifier:String, defaultValue:Dynamic):Void
 	{
 		if (getPref(identifier) == null) setPref(identifier, defaultValue);
 	}
