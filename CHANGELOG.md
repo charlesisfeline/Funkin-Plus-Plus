@@ -18,7 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Reverted license to Apache License 2.0.
 
-## 1.0.0 - 2023-09-30
+## 1.0.0 - Early October 2023
 
 ### Added
 
@@ -28,10 +28,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - [Haxe Checkstyle](https://github.com/HaxeCheckstyle/haxe-checkstyle) settings.
 - Implemented [hxCodec](https://github.com/polybiusproxy/hxCodec) for playing videos natively.
 - Slightly more softcoded dialogue, still only Senpai though.
+- Credits menu.
 
 ### Changed
 
 - Cleaned up `Project.xml`.
+- Slightly better performance.
 - Re-enabled Discord Rich Presence for CPP builds.
 - Updated Haxe and libraries to the latest versions.
 - The starting note splash for precaching is now more transparent.
@@ -39,7 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Unused files, such as images, spritesheets, sounds, and data.
-- Unneeded libraries from `Project.xml`.
+- Unneeded libraries from `Project.xml`, except `tjson` and `format`, might use these for later.
 - Newgrounds support, as this won't be published on Newgrounds.
 - Polymod support, as it was left unfinished.
 - MP3 files for HTML5 builds. OGG files are used instead.
