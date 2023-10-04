@@ -252,7 +252,7 @@ class TitleState extends MusicBeatState
 
 	function funkyText():Array<Array<String>>
 	{
-		var fullText:String = Assets.getText(Paths.txt('nameText'));
+		var fullText:String = Assets.getText(Paths.txt('nameLines'));
 
 		var firstArray:Array<String> = fullText.split('\n');
 		var swagGoodArray:Array<Array<String>> = [];
