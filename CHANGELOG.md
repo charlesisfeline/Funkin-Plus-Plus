@@ -26,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Visual Studio Code workspace files.
 - [lix](https://github.com/lix-pm/lix.client) support.
 - [Haxe Checkstyle](https://github.com/HaxeCheckstyle/haxe-checkstyle) settings.
-- Implemented [hxCodec](https://github.com/polybiusproxy/hxCodec) for playing videos natively, also videos are now optional, but due to a weird error, it's disabled by default.
+- Implemented [hxCodec](https://github.com/polybiusproxy/hxCodec) for playing videos natively, also videos are now optional.
 - Slightly more softcoded dialogue, still only Senpai though.
 - Credits menu.
 - New options: Ghost Tapping and Antialiasing.

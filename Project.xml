@@ -27,7 +27,7 @@
 	<define name="CRASH_HANDLER" if="desktop release" />
 	<define name="DPI_AWARE" />
 	<define name="NO_DCE" />
-	<!--<define name="VIDEOS_ALLOWED" IF="cpp" />-->
+	<define name="VIDEOS_ALLOWED" IF="cpp" />
 
 	<!-- _____________________________ Path Settings ____________________________ -->
 
