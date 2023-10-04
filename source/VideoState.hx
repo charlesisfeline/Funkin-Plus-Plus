@@ -1,5 +1,6 @@
 package;
 
+#if VIDEOS_ALLOWED
 import flixel.*;
 import flixel.FlxG;
 
@@ -42,3 +43,4 @@ class VideoState extends MusicBeatState
 		FlxG.switchState(new TitleState());
 	}
 }
+#end

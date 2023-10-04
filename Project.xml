@@ -27,7 +27,7 @@
 	<define name="CRASH_HANDLER" if="desktop release" />
 	<define name="DPI_AWARE" />
 	<define name="NO_DCE" />
-	<define name="LUA_ALLOWED" />
+	<!--<define name="VIDEOS_ALLOWED" IF="cpp" />-->
 
 	<!-- _____________________________ Path Settings ____________________________ -->
 
@@ -91,7 +91,7 @@
 	<haxelib name="tjson" />
 
 	<haxelib name="discord_rpc" if="cpp"/> <!-- doesn't work with neko, probably should fix that later -->
-	<haxelib name="hxCodec" if="cpp"/>
+	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
 

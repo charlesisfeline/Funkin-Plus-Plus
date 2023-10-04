@@ -1,5 +1,6 @@
 package video;
 
+#if VIDEOS_ALLOWED
 import hxcodec.flixel.FlxVideo;
 
 class NativeVideo
@@ -30,3 +31,4 @@ class NativeVideo
 			finishCallback();
 	}
 }
+#end

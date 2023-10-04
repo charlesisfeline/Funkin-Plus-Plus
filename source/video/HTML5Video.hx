@@ -1,5 +1,6 @@
 package video;
 
+#if VIDEOS_ALLOWED
 import flixel.FlxG;
 import openfl.events.NetStatusEvent;
 import openfl.media.Video;
@@ -54,3 +55,4 @@ class HTML5Video
 			finish();
 	}
 }
+#end

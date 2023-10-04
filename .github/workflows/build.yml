@@ -63,7 +63,7 @@ jobs:
           haxelib install flixel-tools --quiet
           haxelib install flixel-ui --quiet
           haxelib install flixel-addons --quiet
-          haxelib install hxCodec --quiet 
+         # haxelib install hxCodec --quiet 
           haxelib install hscript --quiet
           haxelib install format --quiet
           haxelib install tjson --quiet
@@ -98,7 +98,7 @@ jobs:
           haxelib install flixel-ui --quiet
           haxelib install flixel-addons --quiet
           haxelib install format --quiet
-          haxelib install hxCodec --quiet
+        # haxelib install hxCodec --quiet
           haxelib install hscript --quiet
           haxelib install hxcpp-debug-server --quiet
           haxelib install tjson --quiet

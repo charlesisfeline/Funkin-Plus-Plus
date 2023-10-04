@@ -20,13 +20,15 @@ import openfl.display.Sprite;
 import openfl.events.AsyncErrorEvent;
 import openfl.events.MouseEvent;
 import openfl.events.NetStatusEvent;
-import openfl.media.Video;
-import openfl.net.NetStream;
 import shaders.BuildingShaders;
 import shaders.ColorSwap;
 import ui.PreferencesMenu;
 
 using StringTools;
+#if VIDEOS_ALLOWED
+import openfl.media.Video;
+import openfl.net.NetStream;
+#end
 
 #if discord_rpc
 import Discord.DiscordClient;
@@ -53,8 +55,10 @@ class TitleState extends MusicBeatState
 	var alphaShader:BuildingShaders;
 	var thingie:FlxSprite;
 
+	#if VIDEOS_ALLOWED
 	var video:Video;
 	var netStream:NetStream;
+	#end
 	private var overlay:Sprite;
 
 	override public function create():Void
@@ -88,10 +92,12 @@ class TitleState extends MusicBeatState
 				StoryMenuState.weekUnlocked[0] = true;
 		}
 
+		#if VIDEOS_ALLOWED
 		if (FlxG.save.data.seenVideo != null)
 		{
 			VideoState.seenVideo = FlxG.save.data.seenVideo;
 		}
+		#end
 		new FlxTimer().start(1, function(tmr:FlxTimer)
 		{
 			startIntro();
@@ -107,6 +113,7 @@ class TitleState extends MusicBeatState
 		#end
 	}
 
+	#if VIDEOS_ALLOWED
 	private function client_onMetaData(metaData:Dynamic)
 	{
 		video.attachNetStream(netStream);
@@ -130,6 +137,7 @@ class TitleState extends MusicBeatState
 
 		trace(event.toString());
 	}
+	#end
 
 	private function overlay_onMouseDown(event:MouseEvent):Void
 	{
@@ -234,8 +242,10 @@ class TitleState extends MusicBeatState
 		else
 			initialized = true;
 
+		#if VIDEOS_ALLOWED
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.onComplete = function() FlxG.switchState(new VideoState());
+		#end
 
 		startedIntro = true;
 	}

@@ -10,11 +10,13 @@ import openfl.Lib;
 import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.events.UncaughtErrorEvent;
-import openfl.media.Video;
-import openfl.net.NetStream;
 import sys.FileSystem;
 import sys.io.File;
 import ui.PreferencesMenu;
+#if VIDEOS_ALLOWED
+import openfl.media.Video;
+import openfl.net.NetStream;
+#end
 
 class Main extends Sprite
 {
@@ -58,9 +60,11 @@ class Main extends Sprite
 		setupGame();
 	}
 
+	#if VIDEOS_ALLOWED
 	var video:Video;
 	var netStream:NetStream;
 	private var overlay:Sprite;
+	#end
 
 	#if !mobile
 	public static var fpsCounter:FPSInfo;

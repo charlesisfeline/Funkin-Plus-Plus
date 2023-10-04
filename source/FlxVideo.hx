@@ -1,5 +1,6 @@
 package;
 
+#if VIDEOS_ALLOWED
 class FlxVideo
 {
 	var backend:VideoBackend;
@@ -19,3 +20,4 @@ class FlxVideo
 }
 
 @:noCompletion private typedef VideoBackend = #if html5 video.HTML5Video #else video.NativeVideo #end;
+#end
