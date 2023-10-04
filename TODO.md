@@ -19,6 +19,7 @@
 - [ ] Verbose mode (`--verbose`)
 - [ ] Tooltips
 - [ ] Fix bugs
+- [ ] Fix videos
 
 ## `'v1.1.0`
 - [ ] Chart Editor Waveforms (maybe in v1.1.0, dont wanna slow shit down)
