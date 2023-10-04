@@ -1,4 +1,4 @@
-package uti;
+package util;
 
 class NativeUtil
 {

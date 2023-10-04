@@ -1408,7 +1408,7 @@ class PlayState extends MusicBeatState
 		trace(totalNotesHit + '/' + totalPlayed + '* 100 = ' + accuracy);
 		if (accuracy >= 100.00)
 		{
-			if (isSick && misses == 0)
+			if (isSick && songMisses == 0)
 				accuracy = 100.00;
 			else
 			{
@@ -2340,7 +2340,7 @@ class PlayState extends MusicBeatState
 		{
 			if (pressArray[spr.ID] && spr.animation.curAnim.name != 'confirm')
 				spr.playAnim('pressed');
-			if (!holdingArray[spr.ID])
+			if (!holdArray[spr.ID])
 				spr.playAnim('static');
 		});
 	}
