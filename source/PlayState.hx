@@ -126,6 +126,7 @@ class PlayState extends MusicBeatState
 	var songScore:Int = 0;
 	var songMisses:Int = 0;
 	var scoreTxt:FlxText;
+
 	public var isSick:Bool = true;
 
 	var grpNoteSplashes:FlxTypedGroup<NoteSplash>;
@@ -154,7 +155,7 @@ class PlayState extends MusicBeatState
 	override public function create()
 	{
 		instance = this;
-		
+
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 
@@ -914,7 +915,7 @@ class PlayState extends MusicBeatState
 	{
 		inCutscene = true;
 
-		#if VIDEOS_ALLOWED 
+		#if VIDEOS_ALLOWED
 		var blackShit:FlxSprite = new FlxSprite(-200, -200).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 		blackShit.scrollFactor.set();
 		add(blackShit);
@@ -940,50 +941,53 @@ class PlayState extends MusicBeatState
 		FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.crochet / 1000) * 5, {ease: FlxEase.quadInOut});
 		startCountdown();
 		cameraMovement();
+		#end
 	}
 
 	function gunsIntro()
 	{
 		inCutscene = true;
 
-			#if VIDEOS_ALLOWED 
+		#if VIDEOS_ALLOWED
 		var blackShit:FlxSprite = new FlxSprite(-200, -200).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 		blackShit.scrollFactor.set();
 		add(blackShit);
 
 		new FlxVideo('videos/gunsCutscene.mp4', function()
 		{
-				remove(blackShit);
+			remove(blackShit);
 			FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.crochet / 1000) * 5, {ease: FlxEase.quadInOut});
 			startCountdown();
 			cameraMovement();
 		});
-			#else
-			FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.crochet / 1000) * 5, {ease: FlxEase.quadInOut});
-			startCountdown();
-			cameraMovement();
+		#else
+		FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.crochet / 1000) * 5, {ease: FlxEase.quadInOut});
+		startCountdown();
+		cameraMovement();
+		#end
 	}
 
 	function stressIntro()
 	{
 		inCutscene = true;
 
-				#if VIDEOS_ALLOWED 
+		#if VIDEOS_ALLOWED
 		var blackShit:FlxSprite = new FlxSprite(-200, -200).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 		blackShit.scrollFactor.set();
 		add(blackShit);
 
 		new FlxVideo('videos/stressCutscene.mp4', function()
 		{
-					remove(blackShit);
+			remove(blackShit);
 			FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.crochet / 1000) * 5, {ease: FlxEase.quadInOut});
 			startCountdown();
 			cameraMovement();
 		});
-				#else
-				FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.crochet / 1000) * 5, {ease: FlxEase.quadInOut});
-				startCountdown();
-				cameraMovement();
+		#else
+		FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, (Conductor.crochet / 1000) * 5, {ease: FlxEase.quadInOut});
+		startCountdown();
+		cameraMovement();
+		#end
 	}
 
 	function initDiscord():Void
@@ -1941,10 +1945,10 @@ class PlayState extends MusicBeatState
 
 				switch (storyWeek)
 				{
-								#if VIDEOS_ALLOWED
+					#if VIDEOS_ALLOWED
 					case 7:
 						FlxG.switchState(new VideoState());
-								#end
+					#end
 					default:
 						FlxG.switchState(new StoryMenuState());
 				}

@@ -58,8 +58,8 @@ class TitleState extends MusicBeatState
 	#if VIDEOS_ALLOWED
 	var video:Video;
 	var netStream:NetStream;
-	#end
 	private var overlay:Sprite;
+	#end
 
 	override public function create():Void
 	{
@@ -137,7 +137,6 @@ class TitleState extends MusicBeatState
 
 		trace(event.toString());
 	}
-	#end
 
 	private function overlay_onMouseDown(event:MouseEvent):Void
 	{
@@ -146,6 +145,7 @@ class TitleState extends MusicBeatState
 
 		FlxG.stage.removeChild(overlay);
 	}
+	#end
 
 	var logoBl:FlxSprite;
 
