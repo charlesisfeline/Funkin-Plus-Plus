@@ -1,27 +1,25 @@
 # Todo
 
 ## `v1.0.0` - Initial release
-
 - [ ] Improved chart editor
 - [ ] Mod support
 	- [X] Softcoded dialogue (TXT)
 	- [ ] Softcoded characters (TXT, JSON)
 	- [ ] Softcoded stages (SScript, TXT)
-	- [ ] Softcoded scripts (SScript)
+	- [ ] Softcoded scripts in SScript
 	- [ ] Notetypes and Events (SScript, TXT, JSON)
 	- [ ] Softcoded weeks (JSON)
     - [ ] Mod selection menu
     - [ ] Character Editor
+	- [ ] LUA script system
+	- [ ] Python script support(?)
     - [ ] Fix bugs
 - [ ] Botplay
 - [ ] Credits menu
 - [ ] Add note offset
 - [ ] Verbose mode (`--verbose`)
-- [ ] Tooltips
-- [ ] Fix bugs
-- [ ] Fix videos
-
-## `'v1.1.0`
+- [ ] Custom substates (SScript and LUA, I guess)
+- [ ] Custom states (SScript and maybe LUA)
 - [ ] Chart Editor Waveforms (maybe in v1.1.0, dont wanna slow shit down)
 - [ ] Custom classes (SSscript)
 	- [ ] Proper super overrides (FlxText_HSX doesn't allow overrides for update because of this)
@@ -31,3 +29,4 @@
 - [ ] Week Editor
 - [ ] Stage Editor
 - [ ] Full 3D support via stages files
+- [ ] Fix bugs
