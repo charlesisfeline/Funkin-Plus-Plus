@@ -3,8 +3,8 @@ package;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
-import flixel.util.FlxColor;
 import flixel.math.FlxMath;
+import flixel.util.FlxColor;
 
 class MenuItem extends FlxSpriteGroup
 {
@@ -35,14 +35,7 @@ class MenuItem extends FlxSpriteGroup
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
-		if (MainMenuState.currentFPS == 1)
-			y = FlxMath.lerp(y, (targetY * 120) + 480, 0.34);
-		if (MainMenuState.currentFPS == 2)
-			y = FlxMath.lerp(y, (targetY * 120) + 480, 0.17);
-		if (MainMenuState.currentFPS == 3)
-			y = FlxMath.lerp(y, (targetY * 120) + 480, 0.085);
-		if (MainMenuState.currentFPS == 4)
-			y = FlxMath.lerp(y, (targetY * 120) + 480, 0.0425);
+		y = FlxMath.lerp(y, (targetY * 120) + 480, 0.17);
 
 		if (isFlashing)
 			flashingInt += 1;

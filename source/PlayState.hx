@@ -207,7 +207,15 @@ class PlayState extends MusicBeatState
 			case 'thorns':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('dialogue/thorns'));
 			default: // auto detection for dialogue!!! WOW!!!!!
-				dialogue = CoolUtil.coolTextFile(Paths.txt('dialogue/' + SONG.song.toLowerCase()));
+				var file:String = CoolUtil.coolTextFile(Paths.txt('dialogue/' + SONG.song.toLowerCase()));
+				try
+				{
+					dialogue = CoolUtil.coolTextFile(file);
+				}
+				catch (ex:Any)
+				{
+					dialogue = null;
+				}
 		}
 
 		#if discord_rpc
@@ -780,14 +788,7 @@ class PlayState extends MusicBeatState
 
 		add(camFollow);
 
-		if (MainMenuState.currentFPS == 1)
-			FlxG.camera.follow(camFollow, LOCKON, 0.16);
-		if (MainMenuState.currentFPS == 2)
-			FlxG.camera.follow(camFollow, LOCKON, 0.04);
-		if (MainMenuState.currentFPS == 3)
-			FlxG.camera.follow(camFollow, LOCKON, 0.01);
-		if (MainMenuState.currentFPS == 4)
-			FlxG.camera.follow(camFollow, LOCKON, 0.0025);
+		FlxG.camera.follow(camFollow, LOCKON, 0.04);
 		// FlxG.camera.setScrollBounds(0, FlxG.width, 0, FlxG.height);
 		FlxG.camera.zoom = defaultCamZoom;
 		FlxG.camera.focusOn(camFollow.getPosition());

@@ -1,5 +1,7 @@
 package;
 
+// optional
+
 #if VIDEOS_ALLOWED
 import flixel.*;
 import flixel.FlxG;

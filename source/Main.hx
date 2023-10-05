@@ -90,8 +90,6 @@ class Main extends Sprite
 
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, /*zoom,*/ framerate, framerate, skipSplash, startFullscreen));
 
-		setFPS();
-
 		#if !mobile
 		fpsCounter = new ui.FPSInfo(10, 3, 0xFFFFFF);
 		addChild(fpsCounter);
@@ -106,35 +104,6 @@ class Main extends Sprite
 	inline public static function resetState()
 	{
 		FlxG.switchState(FlxG.state);
-	}
-
-	function setFPS()
-	{
-		MainMenuState.currentFPS = FlxG.save.data.currentFPS;
-
-		if (MainMenuState.currentFPS == 1)
-		{
-			FlxG.updateFramerate = 30;
-			FlxG.drawFramerate = 30;
-		}
-
-		if (MainMenuState.currentFPS == 2)
-		{
-			FlxG.updateFramerate = 60;
-			FlxG.drawFramerate = 60;
-		}
-
-		if (MainMenuState.currentFPS == 3)
-		{
-			FlxG.updateFramerate = 120;
-			FlxG.drawFramerate = 120;
-		}
-
-		if (MainMenuState.currentFPS == 4)
-		{
-			FlxG.updateFramerate = 240;
-			FlxG.drawFramerate = 240;
-		}
 	}
 
 	#if CRASH_HANDLER
