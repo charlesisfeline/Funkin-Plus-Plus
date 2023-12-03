@@ -66,6 +66,7 @@ jobs:
           haxelib install flixel-ui --quiet
           haxelib install flixel-addons --quiet
           haxelib install hscript --quiet
+          haxelib install hxCodec --quiet
           haxelib install format --quiet
           haxelib install tjson --quiet
           haxelib install hxcpp-debug-server --quiet
@@ -96,6 +97,7 @@ jobs:
           haxelib run lime setup --quiet
           haxelib run lime setup flixel --quiet
           haxelib install flixel-tools --quiet
+          haxelib install hxCodec --quiet
           haxelib install flixel-ui --quiet
           haxelib install flixel-addons --quiet
           haxelib install format --quiet
