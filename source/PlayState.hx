@@ -36,8 +36,7 @@ using StringTools;
 import Discord.DiscordClient;
 #end
 
-class PlayState extends MusicBeatState
-{
+class PlayState extends MusicBeatState {
 	public static var instance:PlayState;
 
 	public static var curStage:String = '';
@@ -140,7 +139,7 @@ class PlayState extends MusicBeatState
 
 	var inCutscene:Bool = false;
 
-	#if discord_rpc
+	#if discord_rpc 
 	// Discord RPC variables
 	var storyDifficultyText:String = "";
 	var iconRPC:String = "";
@@ -156,12 +155,10 @@ class PlayState extends MusicBeatState
 	{
 		instance = this;
 
-		if (FlxG.sound.music != null)
-			FlxG.sound.music.stop();
+		if(FlxG.sound.music != null) FlxG.sound.music.stop();
 
 		FlxG.sound.cache(Paths.inst(SONG.song));
-		if (SONG.needsVoices)
-			FlxG.sound.cache(Paths.voices(SONG.song));
+		if(SONG.needsVoices) FlxG.sound.cache(Paths.voices(SONG.song));
 
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new SwagCamera();
@@ -181,9 +178,8 @@ class PlayState extends MusicBeatState
 		Conductor.changeBPM(SONG.bpm);
 
 		foregroundSprites = new FlxTypedGroup<BGSprite>();
-		switch (SONG.song.toLowerCase())
-		{
-			case 'tutorial':
+		switch (SONG.song.toLowerCase()) {
+			/*case 'tutorial':
 				dialogue = ["Hey you're pretty cute.", 'Use the arrow keys to keep up \nwith me singing.'];
 			case 'bopeebo':
 				dialogue = [
@@ -199,17 +195,13 @@ class PlayState extends MusicBeatState
 					"gah you think you're hot stuff?",
 					"If you can beat me here...",
 					"Only then I will even CONSIDER letting you\ndate my daughter!"
-				];
-			case 'senpai':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('dialogue/senpai'));
-			case 'roses':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('dialogue/roses'));
-			case 'thorns':
-				dialogue = CoolUtil.coolTextFile(Paths.txt('dialogue/thorns'));
+				];*/ // might rework these into txt form soon ig
+			case 'senpai': dialogue = CoolUtil.coolTextFile(Paths.txt('dialogue/senpai'));
+			case 'roses': dialogue = CoolUtil.coolTextFile(Paths.txt('dialogue/roses'));
+			case 'thorns': dialogue = CoolUtil.coolTextFile(Paths.txt('dialogue/thorns'));
 			default: // auto detection for dialogue!!! WOW!!!!!
-				var file:String = CoolUtil.coolTextFile(Paths.txt('dialogue/' + SONG.song.toLowerCase()));
-				try
-				{
+				var file:Array<String> = CoolUtil.coolTextFile(Paths.txt('dialogue/' + SONG.song.toLowerCase()));
+				try {
 					dialogue = CoolUtil.coolTextFile(file);
 				}
 				catch (ex:Any)
@@ -218,12 +210,9 @@ class PlayState extends MusicBeatState
 				}
 		}
 
-		#if discord_rpc
-		initDiscord();
-		#end
+		#if discord_rpc initDiscord(); #end
 
-		switch (SONG.song.toLowerCase())
-		{
+		switch (SONG.song.toLowerCase()) {
 			case 'spookeez' | 'monster' | 'south':
 				curStage = "spooky";
 				halloweenLevel = true;
