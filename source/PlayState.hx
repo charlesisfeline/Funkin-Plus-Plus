@@ -200,11 +200,8 @@ class PlayState extends MusicBeatState {
 			case 'roses': dialogue = CoolUtil.coolTextFile(Paths.txt('dialogue/roses'));
 			case 'thorns': dialogue = CoolUtil.coolTextFile(Paths.txt('dialogue/thorns'));
 			default: // auto detection for dialogue!!! WOW!!!!!
-				var file:Array<String> = CoolUtil.coolTextFile(Paths.txt('dialogue/' + SONG.song.toLowerCase()));
-				try {
-					dialogue = CoolUtil.coolTextFile(file);
-				}
-				catch (ex:Any)
+				try {dialogue = CoolUtil.coolTextFile(Paths.txt('dialogue/' + SONG.song.toLowerCase()));} // making a variable wouldnt work so lets see what this does!
+				catch (ex:Any) 
 				{
 					dialogue = null;
 				}
