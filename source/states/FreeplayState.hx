@@ -49,8 +49,6 @@ class FreeplayState extends MusicBeatState
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 
-		var isDebug:Bool = false;
-
 		var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplaySonglist'));
 
 		for (i in 0...initSonglist.length)
