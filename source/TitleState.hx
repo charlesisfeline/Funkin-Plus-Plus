@@ -25,11 +25,11 @@ import shaders.ColorSwap;
 import ui.PreferencesMenu;
 
 using StringTools;
+
 #if VIDEOS_ALLOWED
 import openfl.media.Video;
 import openfl.net.NetStream;
 #end
-
 #if discord_rpc
 import Discord.DiscordClient;
 #end
@@ -79,9 +79,18 @@ class TitleState extends MusicBeatState
 
 		super.create();
 
+		#if polymod
+		ModHandler.init();
+		#end
+
 		PreferencesMenu.initPrefs();
 		PlayerSettings.init();
 		Highscore.load();
+
+		#if cpp
+		NativeGc.enable(true);
+		#end
+		CoolUtil.runGC();
 
 		if (FlxG.save.data.weekUnlocked != null)
 		{
@@ -397,29 +406,18 @@ class TitleState extends MusicBeatState
 					{
 						case 1:
 							createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
-						// credTextShit.visible = true;
-						case 3:
+						case 3: 
 							addMoreText('present');
-						// credTextShit.text += '\npresent...';
-						// credTextShit.addText();
 						case 4:
 							deleteCoolText();
-						// credTextShit.visible = false;
-						// credTextShit.text = 'In association \nwith';
-						// credTextShit.screenCenter();
 						case 5:
-							createCoolText(['In association', 'with']);
+							createCoolText(['Not associated', 'with']);
 						case 7:
 							addMoreText('newgrounds');
 							ngSpr.visible = true;
-						// credTextShit.text += '\nNewgrounds';
 						case 8:
 							deleteCoolText();
 							ngSpr.visible = false;
-						// credTextShit.visible = false;
-
-						// credTextShit.text = 'Shoutouts Tom Fulp';
-						// credTextShit.screenCenter();
 						case 9:
 							createCoolText([curWacky[0]]);
 						case 11:

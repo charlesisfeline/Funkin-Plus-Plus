@@ -4,38 +4,32 @@ import flixel.FlxSprite;
 
 class BGSprite extends FlxSprite
 {
-	/**
-		Cool lil utility thing just so that it can easy do antialiasing and scrollfactor bullshit
-	 */
 	public var idleAnim:String;
 
-	public function new(image:String, x:Float = 0, y:Float = 0, parX:Float = 1, parY:Float = 1, ?daAnimations:Array<String>, ?loopingAnim:Bool = false)
+	override public function new(image:String, x:Float = 0, y:Float = 0, scrollX:Float = 1, scrollY:Float = 1, ?animations:Array<String>,
+			loopAnims:Bool = false)
 	{
 		super(x, y);
-
-		if (daAnimations != null)
+		if (animations != null)
 		{
 			frames = Paths.getSparrowAtlas(image);
-			for (anims in daAnimations)
+			for (anim in animations)
 			{
-				animation.addByPrefix(anims, anims, 24, loopingAnim);
-				animation.play(anims);
-
+				animation.addByPrefix(anim, anim, 24, loopAnims);
 				if (idleAnim == null)
-					idleAnim = anims;
+					idleAnim = anim;
 			}
+			dance();
 		}
 		else
 		{
 			loadGraphic(Paths.image(image));
 			active = false;
 		}
-
-		scrollFactor.set(parX, parY);
-		antialiasing = PreferencesMenu.getPref('antialiasing');
+		scrollFactor.set(scrollX, scrollY);
+		antialiasing = true;
 	}
-
-	public function dance():Void
+	public function dance()
 	{
 		if (idleAnim != null)
 			animation.play(idleAnim);

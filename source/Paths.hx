@@ -7,7 +7,7 @@ import openfl.utils.Assets as OpenFlAssets;
 
 class Paths
 {
-	inline public static var SOUND_EXT = "ogg";
+	public static final SOUND_EXT:String = "ogg";
 
 	static var currentLevel:String;
 

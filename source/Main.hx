@@ -30,7 +30,7 @@ class Main extends Sprite
 	#else
 	var framerate:Int = 144; // How many frames per second the game should run at.
 	#end
-		var zoom:Float = -1;
+	var zoom:Float = -1;
 	var skipSplash:Bool = true; // Whether to skip the flixel splash screen that appears in release mode.
 	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 
@@ -107,37 +107,34 @@ class Main extends Sprite
 	}
 
 	#if CRASH_HANDLER
-	static final crashHandlerDirectory:String = './crash/';
+	static final crashHandlerDirectory:String = './crash';
 
 	// crash handler made by sqirra-rng
 	function onCrash(e:UncaughtErrorEvent):Void
 	{
-		var errMsg:String = "";
-		var path:String = crashHandlerDirectory + "FNF_" + Date.now().toString().replace(" ", "_").replace(":", "'") + ".txt";
+		var errMsg:String = '';
 
 		for (stackItem in CallStack.exceptionStack(true))
 		{
 			switch (stackItem)
 			{
 				case FilePos(s, file, line, column):
-					errMsg += file + " (line " + line + ")\n";
+					errMsg += file + ' (line ' + line + ')\n';
 				default:
 					Sys.println(stackItem);
 			}
 		}
 
-		errMsg += "\nUncaught Error: " + e.error;
+		errMsg += '\nUncaught Error: ' + e.error + '\nPlease report this error to the GitHub page: https://github.com/Stilic/FNF-SoftieEngine';
 
 		if (!FileSystem.exists(crashHandlerDirectory))
 			FileSystem.createDirectory(crashHandlerDirectory);
-
-		File.saveContent(path, errMsg + "\n");
+		File.saveContent(crashHandlerDirectory + '/' + Date.now().toString().replace(' ', '_').replace(':', "'") + '.txt', errMsg + '\n');
 
 		Sys.println(errMsg);
-		Sys.println("Crash dump saved in " + Path.normalize(path));
+		Application.current.window.alert(errMsg, 'Error!');
 
-		Application.current.window.alert(errMsg, "Error!");
-		Discord.DiscordClient.shutdown();
+		DiscordClient.shutdown();
 		Sys.exit(1);
 	}
 	#end

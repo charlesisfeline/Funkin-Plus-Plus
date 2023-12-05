@@ -84,6 +84,7 @@ class MainMenuState extends MusicBeatState
 		menuItems.enabled = false; // disable for intro
 		menuItems.createItem('story mode', function() startExitState(new states.StoryMenuState()));
 		menuItems.createItem('freeplay', function() startExitState(new states.FreeplayState()));
+		#if polymod menuItems.createItem(null, null, "mods", function() startExitState(new ModsMenuState())); #end
 		#if CAN_OPEN_LINKS
 		var hasPopupBlocker = #if web true #else false #end;
 
@@ -201,7 +202,16 @@ private class MainMenuList extends MenuTypedList<MainMenuItem>
 		item.fireInstantly = fireInstantly;
 		item.ID = length;
 
-		return addItem(name, item);
+		addItem(name, item);
+		if (length > 4)
+		{
+			var scr:Float = (length - 4) * 0.135;
+			forEachAlive(function(item:MainMenuItem)
+			{
+				item.scrollFactor.set(0, scr);
+			});
+		}
+		return item;
 	}
 
 	override function destroy()

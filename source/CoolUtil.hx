@@ -1,5 +1,14 @@
 package;
 
+#if cpp
+import cpp.NativeGc;
+#elseif hl
+import hl.Gc;
+#elseif java
+import java.vm.Gc;
+#elseif neko
+import neko.vm.Gc;
+#end
 import flixel.FlxG;
 import flixel.math.FlxMath;
 import haxe.CallStack;
@@ -198,6 +207,18 @@ class CoolUtil
 			dumbArray.push(i);
 		}
 		return dumbArray;
+	}
+
+	inline public static function runGC():Void
+	{
+		#if cpp
+		NativeGc.compact();
+		NativeGc.run(true);
+		#elseif hl
+		Gc.major();
+		#elseif (java || neko)
+		Gc.run(true);
+		#end
 	}
 
 	/**

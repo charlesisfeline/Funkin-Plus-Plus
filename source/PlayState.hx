@@ -750,7 +750,7 @@ class PlayState extends MusicBeatState {
 
 		// fake notesplash cache type deal so that it loads in the graphic?
 
-		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
+		grpes = new FlxTypedGroup<NoteSplash>();
 
 		var noteSplash:NoteSplash = new NoteSplash(100, 100, 0);
 		grpNoteSplashes.add(noteSplash);
@@ -2041,7 +2041,7 @@ class PlayState extends MusicBeatState {
 		if (daRating == 'sick')
 			totalNotesHit += 1;
 
-		if (isSick)
+		if (isSick && PreferencesMenu.getPref('splashes'))
 		{
 			var noteSplash:NoteSplash = grpNoteSplashes.recycle(NoteSplash);
 			noteSplash.setupNoteSplash(daNote.x, daNote.y, daNote.noteData);

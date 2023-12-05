@@ -185,17 +185,15 @@ class LoadingState extends MusicBeatState
 		return target;
 	}
 
-	#if LOADING_SCREEN
-	static function isSoundLoaded(path:String):Bool
+	inline static function isSoundLoaded(path:String):Bool
 	{
 		return Assets.cache.hasSound(path);
 	}
 
-	static function isLibraryLoaded(library:String):Bool
+	inline static function isLibraryLoaded(library:String):Bool
 	{
 		return Assets.getLibrary(library) != null;
 	}
-	#end
 
 	override function destroy()
 	{
@@ -281,7 +279,7 @@ class MultiCallback
 	var unfired = new Map<String, Void->Void>();
 	var fired = new Array<String>();
 
-	public function new(callback:Void->Void, logId:String = null)
+	public function new(?callback:Void->Void, logId:String = null)
 	{
 		this.callback = callback;
 		this.logId = logId;

@@ -4,12 +4,15 @@ import flixel.FlxCamera;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSprite;
+import flixel.util.FlxSave;
 import ui.AtlasText.AtlasFont;
 import ui.TextMenuList.TextMenuItem;
 
 class PreferencesMenu extends ui.OptionsState.Page
 {
-	public static var preferences:Map<String, Dynamic> = new Map();
+	static var save:FlxSave;
+
+	public static var preferences:Map<String, Dynamic> = new Map<String, Dynamic>();
 
 	static var defaultPreferences:Array<Array<Dynamic>> = [
 		['naughtyness', 'censor-naughty', true],
@@ -17,11 +20,11 @@ class PreferencesMenu extends ui.OptionsState.Page
 		['flashing lights', 'flashing-menu', true],
 		['camera zooms', 'camera-zoom', true],
 		['ghost tapping', 'ghost-tapping', true],
-		['antialiasing', 'antialiasing', true], 
+		['note splashes', 'splashes', false],
+		// ['hitsounds', 'hitsounds', false],
+		['antialiasing', 'antialiasing', true],
 		#if !mobile
-		['fps counter', 'fps-counter', true], 
-		['memory counter', 'mem-counter', true], 
-		['memory peak counter', 'mem-peak-counter', true],
+		['fps counter', 'fps-counter', true], ['memory counter', 'mem-counter', true], ['memory peak counter', 'mem-peak-counter', true],
 		#end
 		#if (desktop || web)
 		['auto pause', 'auto-pause', #if web false #else true #end]
@@ -78,7 +81,12 @@ class PreferencesMenu extends ui.OptionsState.Page
 
 	public static function initPrefs()
 	{
-		if (FlxG.save.data.preferences != null) preferences = FlxG.save.data.preferences;
+		save = new FlxSave();
+		save.bind('preferences', 'charlescatyt');
+		if (save.data.preferences != null)
+		{
+			preferences = cast save.data.preferences;
+		}
 		for (pref in defaultPreferences)
 		{
 			preferenceCheck(pref[1], pref[2]);
@@ -89,8 +97,8 @@ class PreferencesMenu extends ui.OptionsState.Page
 
 	public static function savePrefs()
 	{
-		FlxG.save.data.preferences = preferences;
-		FlxG.save.flush();
+		save.data.preferences = preferences;
+		save.flush();
 	}
 
 	private function createPrefItem(prefName:String, prefString:String, prefValue:Dynamic):Void
@@ -151,11 +159,14 @@ class PreferencesMenu extends ui.OptionsState.Page
 			#end
 			#if !mobile
 			case 'fps-counter':
-				if (Main.fpsCounter != null) Main.fpsCounter.showFPS = getPref(identifier);
+				if (Main.fpsCounter != null)
+					Main.fpsCounter.showFPS = getPref(identifier);
 			case 'mem-counter':
-				if (Main.fpsCounter != null) Main.fpsCounter.showMemory = getPref(identifier);
+				if (Main.fpsCounter != null)
+					Main.fpsCounter.showMemory = getPref(identifier);
 			case 'mem-peak-counter':
-				if (Main.fpsCounter != null) Main.fpsCounter.showMemoryPeak = getPref(identifier);
+				if (Main.fpsCounter != null)
+					Main.fpsCounter.showMemoryPeak = getPref(identifier);
 			#end
 		}
 	}
@@ -177,7 +188,8 @@ class PreferencesMenu extends ui.OptionsState.Page
 
 	private static function preferenceCheck(identifier:String, defaultValue:Dynamic):Void
 	{
-		if (getPref(identifier) == null) setPref(identifier, defaultValue);
+		if (getPref(identifier) == null)
+			setPref(identifier, defaultValue);
 	}
 }
 

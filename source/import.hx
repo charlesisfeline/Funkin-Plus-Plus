@@ -16,6 +16,8 @@ import haxe.*;
 import hscript.*;
 import lime.app.Application.*;
 import lime.utils.Assets;
+import modding.*;
+import modding.ModHandler;
 import shaders.*;
 import states.*;
 import states.FreeplayState;
