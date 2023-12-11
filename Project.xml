@@ -92,7 +92,7 @@
 	<haxelib name="hxcpp-debug-server" if="desktop" />
 	<haxelib name="format" />
 	<haxelib name="tjson" />
-	<haxelib name="polymod" if="desktop" />
+	<haxelib name="polymod" />
 
 	<haxelib name="discord_rpc" if="cpp"/> <!-- doesn't work with neko, probably should fix that later -->
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>
