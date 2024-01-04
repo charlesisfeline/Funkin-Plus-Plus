@@ -87,9 +87,7 @@ class TitleState extends MusicBeatState
 		PlayerSettings.init();
 		Highscore.load();
 
-		#if cpp
-		NativeGc.enable(true);
-		#end
+		// #if cpp NativeGc.enable(true); #end
 		CoolUtil.runGC();
 
 		if (FlxG.save.data.weekUnlocked != null)
