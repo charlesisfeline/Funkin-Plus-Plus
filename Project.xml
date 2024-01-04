@@ -27,6 +27,7 @@
 	<define name="CRASH_HANDLER" if="desktop release" />
 	<define name="DPI_AWARE" />
 	<define name="NO_DCE" />
+	<!--<define name="POLYMOD_SUPPORT" if="desktop" />-->
 	<define name="VIDEOS_ALLOWED" IF="cpp" />
 
 	<!-- _____________________________ Path Settings ____________________________ -->
@@ -77,8 +78,8 @@
 	<assets path='art/readme copy.txt' rename='readme.txt' />
 	<assets path='art/readme.txt' rename='baseReadme.txt' />
 	<assets path="CHANGELOG.md" />
-	<assets path="mods" embed="false" if="polymod" />
-	<assets path="mods/mods.md" rename='mods/MODDING.md'/>
+	<assets path="mods" embed="false" if="POLYMOD_SUPPORT" />
+	<assets path="mods/mods.md" rename='mods/MODDING.md' if="POLYMOD_SUPPORT" />
 
 	<assets path="assets/fonts" embed='false' />
 	<!-- _______________________________ Libraries ______________________________ -->
@@ -92,7 +93,7 @@
 	<haxelib name="hxcpp-debug-server" if="desktop" />
 	<haxelib name="format" />
 	<haxelib name="tjson" />
-	<haxelib name="polymod" />
+	<haxelib name="polymod" if="POLYMOD_SUPPORT" />
 
 	<haxelib name="discord_rpc" if="cpp"/> <!-- doesn't work with neko, probably should fix that later -->
 	<haxelib name="hxCodec" if="VIDEOS_ALLOWED"/>

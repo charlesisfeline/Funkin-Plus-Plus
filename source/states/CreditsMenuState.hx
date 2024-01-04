@@ -44,14 +44,10 @@ class CreditsMenu extends MusicBeatState
 			initCreditlist = File.getContent(Paths.modTxt('data/creditsList')).trim().split('\n');
 
 			for (i in 0...initCreditlist.length)
-			{
 				initCreditlist[i] = initCreditlist[i].trim();
-			}
 		}
 		else
-		{
 			initCreditlist = CoolUtil.coolTextFile(Paths.txt('data/creditsList'));
-		}
 
 		for (i in 0...initCreditlist.length)
 		{
@@ -61,7 +57,7 @@ class CreditsMenu extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("Credits Menu/", null);
 		#end
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
@@ -71,7 +67,7 @@ class CreditsMenu extends MusicBeatState
 		descText = new FlxText(50, 600, 1180, "", 32);
 		descText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		descText.scrollFactor.set();
-		descText.text = 'what';
+		descText.text = 'real';
 		descText.borderSize = 2.4;
 		add(descText);
 
@@ -89,8 +85,6 @@ class CreditsMenu extends MusicBeatState
 		}
 
 		changeSelection();
-		// FlxG.sound.playMusic(Paths.music('title'), 0);
-		// FlxG.sound.music.fadeIn(2, 0, 0.8);
 
 		var descText:FlxText = new FlxText(50, 600, 1180, "", 32);
 		descText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);

@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Friday Night Funkin' (the game).
-- WIP modding support, powered by Polymod. It's a rework, we all know.
+- ~~WIP modding support, powered by Polymod. It's a rework, we all know.~~
 - Visual Studio Code workspace files.
 - [lix](https://github.com/lix-pm/lix.client) support.
 - [Haxe Checkstyle](https://github.com/HaxeCheckstyle/haxe-checkstyle) settings.

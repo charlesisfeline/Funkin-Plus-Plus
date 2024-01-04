@@ -84,7 +84,7 @@ class MainMenuState extends MusicBeatState
 		menuItems.enabled = false; // disable for intro
 		menuItems.createItem('story mode', function() startExitState(new states.StoryMenuState()));
 		menuItems.createItem('freeplay', function() startExitState(new states.FreeplayState()));
-		#if polymod menuItems.createItem(null, null, "mods", function() startExitState(new ModsMenuState())); #end
+		#if POLYMOD_SUPPORT menuItems.createItem(null, null, "mods", function() startExitState(new ModsMenuState())); #end
 		#if CAN_OPEN_LINKS
 		var hasPopupBlocker = #if web true #else false #end;
 
@@ -105,7 +105,7 @@ class MainMenuState extends MusicBeatState
 		FlxG.cameras.reset(new SwagCamera());
 		FlxG.camera.follow(camFollow, null, 0.06);
 
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "Funkin' Plus Plus\nFriday Night Funkin' v" + Application.current.meta.get('version'),
+		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "Funkin' ++\nFriday Night Funkin' v" + Application.current.meta.get('version'),
 			12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);

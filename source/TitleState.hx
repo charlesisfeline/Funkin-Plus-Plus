@@ -79,7 +79,7 @@ class TitleState extends MusicBeatState
 
 		super.create();
 
-		#if polymod
+		#if POLYMOD_SUPPORT
 		ModHandler.init();
 		#end
 

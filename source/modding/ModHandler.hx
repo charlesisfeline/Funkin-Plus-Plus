@@ -1,5 +1,6 @@
 package modding;
 
+#if POLYMOD_SUPPORT
 #if sys
 import sys.FileSystem;
 #end
@@ -97,3 +98,4 @@ class ModHandler
 		});
 	}
 }
+#end

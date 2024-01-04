@@ -12,6 +12,7 @@ import openfl.display.BitmapData;
 
 using StringTools;
 
+#if POLYMOD_SUPPORT
 class ModsMenuState extends MusicBeatState
 {
 	var curSelected:Int = 0;
@@ -147,3 +148,4 @@ class ModsMenuState extends MusicBeatState
 		scoreBG.x = FlxG.width - scoreBG.scale.x / 2;
 	}
 }
+#end
