@@ -217,10 +217,10 @@ class Controls extends FlxActionSet
 	// inline
 	public function checkByName(name:Action):Bool
 	{
-		#if debug
+		/*#if debug
 		if (!byName.exists(name))
 			throw 'Invalid name: $name';
-		#end
+			#end */
 		return byName[name].check();
 	}
 

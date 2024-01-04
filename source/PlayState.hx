@@ -1576,14 +1576,14 @@ class PlayState extends MusicBeatState {
 			else
 				FlxG.switchState(new CharacterOffsetState(SONG.player2)); // dad
 		}
-		#if debug
+		// #if debug
 		if (FlxG.keys.justPressed.ONE)
 			endSong();
 		if (FlxG.keys.justPressed.PAGEUP)
 			changeSection(1);
 		if (FlxG.keys.justPressed.PAGEDOWN)
 			changeSection(-1);
-		#end
+		// #end
 
 		if (generatedMusic && SONG.notes[Std.int(curStep / 16)] != null)
 		{
@@ -1884,7 +1884,7 @@ class PlayState extends MusicBeatState {
 		}
 	}
 
-	#if debug
+	// #if debug
 	function changeSection(sec:Int):Void
 	{
 		FlxG.sound.music.pause();
@@ -1903,7 +1903,7 @@ class PlayState extends MusicBeatState {
 		updateCurStep();
 		resyncVocals();
 	}
-	#end
+	// #end
 
 	function endSong():Void
 	{
