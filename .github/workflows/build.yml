@@ -7,8 +7,6 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-# haxelib install hxCodec --quiet
-
 jobs:
   buildLinux:
     runs-on: ubuntu-latest
@@ -34,7 +32,6 @@ jobs:
           haxelib install flixel-addons --quiet
           haxelib install hxCodec --quiet
           haxelib install format --quiet
-        # haxelib install polymod --quiet
           haxelib install hscript --quiet
           haxelib install tjson --quiet
           haxelib install hxcpp-debug-server --quiet
@@ -69,7 +66,6 @@ jobs:
           haxelib install hscript --quiet
           haxelib install hxCodec --quiet
           haxelib install format --quiet
-        # haxelib install polymod --quiet
           haxelib install tjson --quiet
           haxelib install hxcpp-debug-server --quiet
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
@@ -102,7 +98,6 @@ jobs:
           haxelib install hxCodec --quiet
           haxelib install flixel-ui --quiet
           haxelib install flixel-addons --quiet
-        # haxelib install polymod --quiet
           haxelib install format --quiet
           haxelib install hscript --quiet
           haxelib install hxcpp-debug-server --quiet
