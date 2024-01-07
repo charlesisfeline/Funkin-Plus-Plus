@@ -14,7 +14,7 @@
     - [ ] Character Editor
     - [ ] Week Editor
     - [ ] Fix bugs
-- [X] Botplay
+- [ ] Botplay
 - [X] Credits menu
 - [ ] Add note offset
 - [ ] Mod support
