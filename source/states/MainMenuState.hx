@@ -13,6 +13,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
+import tjson.TJSON as Json;
 import ui.AtlasMenuList.AtlasMenuItem;
 import ui.MenuList.MenuTypedList;
 import ui.OptionsState;
@@ -24,9 +25,17 @@ using StringTools;
 import Discord.DiscordClient;
 #end
 
+typedef MainMenuData =
+{
+	donateButton:Bool,
+	donateLink:String
+}
+
 class MainMenuState extends MusicBeatState
 {
 	var menuItems:MainMenuList;
+
+	var menuJunk:MainMenuData;
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
@@ -40,6 +49,9 @@ class MainMenuState extends MusicBeatState
 
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
+
+		// IGNORE THIS!!!
+		menuJunk = CoolUtil.parseJson(CoolUtil.coolTextFile('config/mainMenu.json'));
 
 		if (!FlxG.sound.music.playing)
 		{
@@ -88,7 +100,8 @@ class MainMenuState extends MusicBeatState
 		#if CAN_OPEN_LINKS
 		var hasPopupBlocker = #if web true #else false #end;
 
-		menuItems.createItem('donate', selectDonate, hasPopupBlocker);
+		if (menuJunk.donateButton == true)
+			menuItems.createItem('donate', selectDonate, hasPopupBlocker);
 		#end
 		menuItems.createItem('options', function() startExitState(new OptionsState()));
 
@@ -105,8 +118,7 @@ class MainMenuState extends MusicBeatState
 		FlxG.cameras.reset(new SwagCamera());
 		FlxG.camera.follow(camFollow, null, 0.06);
 
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "Funkin' ++\nFriday Night Funkin' v" + Application.current.meta.get('version'),
-			12);
+		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "Funkin' ++\nFriday Night Funkin' v" + Application.current.meta.get('version'), 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -130,9 +142,9 @@ class MainMenuState extends MusicBeatState
 	function selectDonate()
 	{
 		#if linux
-		Sys.command('/usr/bin/xdg-open', ["https://ninja-muffin24.itch.io/funkin", "&"]);
+		Sys.command('/usr/bin/xdg-open', [menuJunk.discordLink, "&"]);
 		#else
-		FlxG.openURL('https://ninja-muffin24.itch.io/funkin');
+		FlxG.openURL(menuJunk.discordLink);
 		#end
 	}
 	#end

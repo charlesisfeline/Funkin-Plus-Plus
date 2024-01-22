@@ -1499,7 +1499,7 @@ class PlayState extends MusicBeatState {
 
 		super.update(elapsed);
 
-		scoreTxt.text = 'Score: $songScore // Health: $health // Misses: $songMisses // | Accuracy: ' + truncateFloat(accuracy, 2) + "%";
+		scoreTxt.text = 'Score: $songScore | Misses: $songMisses | Accuracy: ' + truncateFloat(accuracy, 2) + "%";
 
 		if (controls.PAUSE && startedCountdown && canPause)
 		{

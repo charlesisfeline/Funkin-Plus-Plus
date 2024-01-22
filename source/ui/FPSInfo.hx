@@ -12,6 +12,7 @@ class FPSInfo extends TextField
 	public var showFPS:Bool = true;
 	public var showMemory:Bool = true;
 	public var showMemoryPeak:Bool = true;
+	public isShowingBoth:Bool = true;
 
 	var times:Array<Float> = [];
 	var memoryPeak:Float = 0;
@@ -60,6 +61,14 @@ class FPSInfo extends TextField
 				if (showMemoryPeak)
 					text += " / " + memoryPeak + "mb";
 			}
+			text += '\nFriday Night Funkin++ v0.1.0';
+
+			#if (gl_stats && !disable_cffi && (!html5 || !canvas))
+			text += "\ntotalDC: " + Context3DStats.totalDrawCalls();
+			text += "\nstageDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE);
+			text += "\nstage3DDC: " + Context3DStats.contextDrawCalls(DrawCallContext.STAGE3D);
+			#end
+			text += "\n"; 
 		}
 	}
 }

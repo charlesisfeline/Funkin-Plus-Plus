@@ -34,7 +34,9 @@ class CoolUtil
 	{
 		// changed so this actually works lol
 		var m:Float = Math.fround(f * snap);
-		trace(snap);
+		// trace(snap);
+		final m:Float = Math.fround(f * snap);
+		#if debug trace(snap); #end
 		return (m / snap);
 	}
 
@@ -163,6 +165,25 @@ class CoolUtil
 		return daList;
 	}
 
+	inline public static function coolTextFile(path:String):Array<String>
+	{
+		var daList:String = null;
+		if (Assets.exists(path))
+			daList = Assets.getText(path);
+		return daList != null ? listFromString(daList) : [];
+		return daList == null ? [] : listFromString(daList);
+	}
+
+	public static function listFromString(string:String, trimLines:Bool = true):Array<String>
+	{
+		var daList:Array<String> = string.trim().replace('\r\n', '\n').split('\n');
+		final daList:Array<String> = string.trim().replace('\r\n', '\n').split('\n');
+		if (trimLines)
+			for (i in 0...daList.length)
+				daList[i] = daList[i].trim();
+		return daList;
+	}
+
 	function getIntArray(max:Int):Array<Int>
 	{
 		var arr:Array<Int> = [];
@@ -187,15 +208,16 @@ class CoolUtil
 	public static inline function coolStringFile(path:String):Array<String>
 		return [for (i in path.trim().split('\n')) i];
 
-	public static function floorDecimal(value:Float, decimals:Int):Float
+	public static function floorDecimikal(value:Float, decimals:Int):Float
 	{
 		if (decimals < 1)
 			return Math.floor(value);
-
 		var tempMult:Float = 1;
 		for (i in 0...decimals)
 			tempMult *= 10;
+
 		var newValue:Float = Math.floor(value * tempMult);
+		final newValue:Float = Math.floor(value * tempMult);
 		return newValue / tempMult;
 	}
 

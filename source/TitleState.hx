@@ -1,5 +1,6 @@
 package;
 
+import cppstuff.WindowsData;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
@@ -12,6 +13,7 @@ import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
+import flixel.tweens.misc.NumTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
@@ -22,6 +24,7 @@ import openfl.events.MouseEvent;
 import openfl.events.NetStatusEvent;
 import shaders.BuildingShaders;
 import shaders.ColorSwap;
+import tjson.TJSON as Json;
 import ui.PreferencesMenu;
 
 using StringTools;
@@ -33,6 +36,16 @@ import openfl.net.NetStream;
 #if discord_rpc
 import Discord.DiscordClient;
 #end
+
+typedef TitleData =
+{
+	title:Array<Float>,
+	start:Array<Float>,
+	gf:Array<Float>,
+	gfScale:Array<Float>,
+	gfAntialiasing:Bool,
+	bpm:Float
+}
 
 class TitleState extends MusicBeatState
 {
@@ -55,13 +68,15 @@ class TitleState extends MusicBeatState
 	var alphaShader:BuildingShaders;
 	var thingie:FlxSprite;
 
+	var titleData:TitleData;
+
 	#if VIDEOS_ALLOWED
 	var video:Video;
 	var netStream:NetStream;
 	private var overlay:Sprite;
 	#end
 
-	override public function create():Void
+	public override function create():Void
 	{
 		startedIntro = false;
 
@@ -75,8 +90,6 @@ class TitleState extends MusicBeatState
 		curWacky = FlxG.random.getObject(getIntroTextShit());
 		nameLines = FlxG.random.getObject(funkyText());
 
-		// DEBUG BULLSHIT
-
 		super.create();
 
 		#if POLYMOD_SUPPORT
@@ -86,6 +99,9 @@ class TitleState extends MusicBeatState
 		PreferencesMenu.initPrefs();
 		PlayerSettings.init();
 		Highscore.load();
+
+		// IGNORE THIS!!!
+		titleJSON = CoolUitl.parseJson(CoolUtil.coolTextFile('config/titleScreen.json'));
 
 		// #if cpp NativeGc.enable(true); #end
 		CoolUtil.runGC();
@@ -138,9 +154,7 @@ class TitleState extends MusicBeatState
 	private function netConnection_onNetStatus(event:NetStatusEvent):Void
 	{
 		if (event.info.code == 'NetStream.Play.Complete')
-		{
 			startIntro();
-		}
 
 		trace(event.toString());
 	}
@@ -180,14 +194,14 @@ class TitleState extends MusicBeatState
 			FlxG.sound.music.fadeIn(4, 0, 0.7);
 		}
 
-		Conductor.changeBPM(102);
+		Conductor.changeBPM(titleData.bpm);
 		persistentUpdate = true;
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 
 		add(bg);
 
-		logoBl = new FlxSprite(-150, -100);
+		logoBl = new FlxSprite(titleData.title[0], titleData.title[1]);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin');
 		logoBl.antialiasing = PreferencesMenu.getPref('antialiasing');
 
@@ -198,18 +212,19 @@ class TitleState extends MusicBeatState
 
 		logoBl.shader = swagShader.shader;
 
-		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
+		gfDance = new FlxSprite(titleData.gf[0], titleData.gf[1]);
 		gfDance.frames = Paths.getSparrowAtlas('gfDanceTitle');
 		gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 		gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
-		gfDance.antialiasing = PreferencesMenu.getPref('antialiasing');
+		gfDance.scale.set(titleData.gfScale[0], titleData.gfScale[1]);
+		gfDance.antialiasing = titleData.gfAntialiasing;
 		add(gfDance);
 
 		gfDance.shader = swagShader.shader;
 
 		add(logoBl);
 
-		titleText = new FlxSprite(100, FlxG.height * 0.8);
+		titleText = new FlxSprite(titleData.start[0], titleData.start[1]);
 		titleText.frames = Paths.getSparrowAtlas('titleEnter');
 		titleText.animation.addByPrefix('idle', "Press Enter to Begin", 24);
 		titleText.animation.addByPrefix('press', "ENTER PRESSED", 24);
@@ -297,7 +312,32 @@ class TitleState extends MusicBeatState
 		if (FlxG.keys.justPressed.F)
 			FlxG.fullscreen = !FlxG.fullscreen;
 
-		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER;
+		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
+
+		if (FlxG.keys.justPressed.ESCAPE && !pressedEnter)
+		{
+			FlxG.sound.music.fadeOut(0.3);
+			#if (cpp && windows)
+			CppApi._setWindowLayered();
+
+			var numTween:NumTween = FlxTween.num(1, 0, 1, {
+				onComplete: function(twn:FlxTween)
+				{
+					Sys.exit(0);
+				}
+			});
+
+			numTween.onUpdate = function(twn:FlxTween)
+			{
+				CppApi.setWindowOpacity(numTween.value);
+			}
+			#else
+			FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function()
+			{
+				Sys.exit(0);
+			}, false);
+			#end
+		}
 
 		#if mobile
 		for (touch in FlxG.touches.list)

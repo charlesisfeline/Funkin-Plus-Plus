@@ -30,4 +30,8 @@ import ui.PreferencesMenu;
 import util.NativeUtil;
 
 using StringTools;
+#if (cpp && windows)
+import cppthing.CppApi;
+#end
+
 #end

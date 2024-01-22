@@ -9,17 +9,22 @@ using StringTools;
 
 class Character extends FlxSprite
 {
+	/**
+	 * In case a character is missing, it will use this on its place
+	**/
+	inline public static final DEFAULT_CHARACTER:String = 'bf';
+
 	public var animOffsets:Map<String, Array<Dynamic>>;
 	public var debugMode:Bool = false;
 
 	public var isPlayer:Bool = false;
-	public var curCharacter:String = 'bf';
+	public var curCharacter:String = DEFAULT_CHARACTER;
 
 	public var holdTimer:Float = 0;
 
 	public var animationNotes:Array<Dynamic> = [];
 
-	public function new(x:Float, y:Float, ?character:String = "bf", ?isPlayer:Bool = false)
+	public function new(x:Float, y:Float, ?character:String = DEFAULT_CHARACTER, ?isPlayer:Bool = false)
 	{
 		super(x, y);
 
@@ -255,33 +260,7 @@ class Character extends FlxSprite
 				loadMappedAnims();
 
 			case 'bf':
-				var tex = Paths.getSparrowAtlas('characters/BOYFRIEND');
-				frames = tex;
-				quickAnimAdd('idle', 'BF idle dance');
-				quickAnimAdd('singUP', 'BF NOTE UP0');
-				quickAnimAdd('singLEFT', 'BF NOTE LEFT0');
-				quickAnimAdd('singRIGHT', 'BF NOTE RIGHT0');
-				quickAnimAdd('singDOWN', 'BF NOTE DOWN0');
-				quickAnimAdd('singUPmiss', 'BF NOTE UP MISS');
-				quickAnimAdd('singLEFTmiss', 'BF NOTE LEFT MISS');
-				quickAnimAdd('singRIGHTmiss', 'BF NOTE RIGHT MISS');
-				quickAnimAdd('singDOWNmiss', 'BF NOTE DOWN MISS');
-				quickAnimAdd('hey', 'BF HEY');
-
-				quickAnimAdd('firstDeath', "BF dies");
-				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
-				quickAnimAdd('deathConfirm', "BF Dead confirm");
-
-				animation.addByPrefix('scared', 'BF idle shaking', 24, true);
-
-				loadOffsetFile(curCharacter);
-
-				playAnim('idle');
-
-				flipX = true;
-
-				loadOffsetFile(curCharacter);
-
+				loadBoyfriend();
 			case 'bf-christmas':
 				var tex = Paths.getSparrowAtlas('characters/bfChristmas');
 				frames = tex;
@@ -484,6 +463,8 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 				flipX = true;
+			default:
+				loadBoyfriend();
 		}
 
 		dance();
@@ -510,6 +491,41 @@ class Character extends FlxSprite
 				}
 			}
 		}
+	}
+
+	function loadBoyfriend()
+	{
+		var tex = Paths.getSparrowAtlas('characters/BOYFRIEND');
+		frames = tex;
+		quickAnimAdd('idle', 'BF idle dance');
+		quickAnimAdd('singUP', 'BF NOTE UP0');
+		quickAnimAdd('singLEFT', 'BF NOTE LEFT0');
+		quickAnimAdd('singRIGHT', 'BF NOTE RIGHT0');
+		quickAnimAdd('singDOWN', 'BF NOTE DOWN0');
+		quickAnimAdd('singUPmiss', 'BF NOTE UP MISS');
+		quickAnimAdd('singLEFTmiss', 'BF NOTE LEFT MISS');
+		quickAnimAdd('singRIGHTmiss', 'BF NOTE RIGHT MISS');
+		quickAnimAdd('singDOWNmiss', 'BF NOTE DOWN MISS');
+		quickAnimAdd('hey', 'BF HEY');
+
+		// currently unused, but may be used for a mechanic in some mods
+		quickAnimAdd('hurt', "BF hit");
+		quickAnimAdd('dodge', "boyfriend dodge");
+		quickAnimAdd('attack', "boyfriend attack");
+
+		quickAnimAdd('firstDeath', "BF dies");
+		animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
+		quickAnimAdd('deathConfirm', "BF Dead confirm");
+
+		animation.addByPrefix('scared', 'BF idle shaking', 24, true);
+
+		loadOffsetFile(curCharacter);
+
+		playAnim('idle');
+
+		flipX = true;
+
+		loadOffsetFile(curCharacter);
 	}
 
 	public function loadMappedAnims()
