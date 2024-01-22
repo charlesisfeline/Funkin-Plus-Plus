@@ -31,7 +31,7 @@ import util.NativeUtil;
 
 using StringTools;
 #if (cpp && windows)
-import cppthing.CppApi;
+import cppstuff.CppApi;
 #end
 
 #end

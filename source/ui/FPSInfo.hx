@@ -12,7 +12,7 @@ class FPSInfo extends TextField
 	public var showFPS:Bool = true;
 	public var showMemory:Bool = true;
 	public var showMemoryPeak:Bool = true;
-	public isShowingBoth:Bool = true;
+	public var isShowingBoth:Bool = true;
 
 	var times:Array<Float> = [];
 	var memoryPeak:Float = 0;
