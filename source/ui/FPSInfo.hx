@@ -61,7 +61,7 @@ class FPSInfo extends TextField
 				if (showMemoryPeak)
 					text += " / " + memoryPeak + "mb";
 			}
-			text += '\nFriday Night Funkin++ v0.1.0';
+			text += '\nFriday Night Funkin\' PlusPlus v0.1.0';
 
 			#if (gl_stats && !disable_cffi && (!html5 || !canvas))
 			text += "\ntotalDC: " + Context3DStats.totalDrawCalls();
